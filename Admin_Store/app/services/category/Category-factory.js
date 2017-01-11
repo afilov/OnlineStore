@@ -1,45 +1,44 @@
-app.factory('ProductFactory', ['$rootScope', '$http', '$timeout', '$q', function ($rootScope, $http, $timeout, $q) {
+app.factory('CategoryFactory', ['$rootScope', '$http', function ($rootScope, $http) {
     return {
-        getAllProducts: function () {
+        getAllCategories: function () {
             return $http({
                 method: 'GET',
-                url: $rootScope.serverUrl + '/get/products',
+                url: $rootScope.serverUrl + '/get/categories',
                 withCredentials: true
             })
         },
-        createProduct: function (data) {
+        createCategory: function (data) {
             return $http({
                 method: 'POST',
-                url: $rootScope.serverUrl + '/create/product',
+                url: $rootScope.serverUrl + '/create/category',
                 withCredentials: true,
                 data: data
             })
         },
-        updateProduct: function (data) {
+        updateCategory: function (data) {
             return $http({
                 method: 'PUT',
-                url: $rootScope.serverUrl + '/update/product',
+                url: $rootScope.serverUrl + '/update/category',
                 withCredentials: true,
                 data: data
             })
         },
-        deleteProduct: function (id) {
+        deleteCategory: function (id) {
             return $http({
                 method: 'POST',
-                url: $rootScope.serverUrl + '/delete/product',
+                url: $rootScope.serverUrl + '/delete/category',
                 withCredentials: true,
                 data: {_id: id}
             })
         },
-        getProductByID: function (id) {
+        getCategoryByID: function (id) {
             return $http({
                 method: 'GET',
-                url: $rootScope.serverUrl + '/get/product/'+ id,
+                url: $rootScope.serverUrl + '/get/category/' + id,
                 withCredentials: true
             })
 
         }
     }
-
 
 }]);

@@ -19,22 +19,27 @@
                 <div class="md-toolbar-tools">
                     <h3>Category</h3>
                 </div>
-                <md-button ng-if="IsNew == false" ng-click="DeleteUser()" class="md-raised md-warn">
+                <md-button ng-show="IsNew" type="submit"
+                           class="md-raised md-primary"
+                           ng-click="CreateCategory()">Create
+                </md-button>
+                <md-button ng-show="!IsNew" ng-disabled="!projectForm.$dirty" class="md-raised md-info"
+                           ng-click="UpdateCategory()">Save
+                </md-button>
+                <md-button ng-if="IsNew == false" ng-click="DeleteCategory()" class="md-raised md-warn">
                     Delete
                 </md-button>
+
             </md-toolbar>
             <md-card-content>
                 <form name="projectForm" class="form-horizontal">
                     <md-input-container class="md-block">
                         <label>Name</label>
-                        <input type="text" ng-model="currentCat.Name"/>
-                    </md-input-container><br>
-                    <md-input-container class="md-block">
-                        <md-checkbox ng-model="currentCat.Enabled">Enabled
-                    </md-input-container><br>
+                        <input type="text" ng-model="currentCategory.Name"/>
+                    </md-input-container>
                     <md-input-container class="md-block" ng-if="IsNew == false">
                         <label>Created On</label>
-                        <input type="date" ng-disabled="true" ng-model="currentCat.CreatedOn"/>
+                        <input type="date" ng-disabled="!IsNew" ng-model="currentCategory.CreatedOn"/>
                     </md-input-container>
                 </form>
             </md-card-content>

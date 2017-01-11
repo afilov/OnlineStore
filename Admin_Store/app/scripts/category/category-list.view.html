@@ -11,7 +11,6 @@
                     <tr md-row>
                         <th md-column>ID</th>
                         <th md-column>Category Name</th>
-                        <th md-column>Enabled</th>
                         <th md-column>Date Created</th>
                     </tr>
                     </thead>
@@ -19,13 +18,10 @@
                     <tr md-row ng-repeat="category in Categories" style="line-height: 30px"
                         ng-click="goToDetails(category)">
                         <td md-cell>
-                            {{category.ID}}
+                            {{category._id}}
                         </td>
                         <td md-cell>
                             {{category.Name}}
-                        </td>
-                        <td md-cell>
-                            {{category.Enabled}}
                         </td>
                         <td md-cell>
                             {{category.CreatedOn | date : "dd.MM.y"}}

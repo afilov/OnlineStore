@@ -21,7 +21,7 @@ app.run(['$rootScope', 'ngToast', '$localStorage', '$q', '$location', '$mdToast'
         $rootScope.User = null;
 
         $rootScope.serverPath = window.location.hostname + ":3000";
-        $rootScope.serverUrl = "http://" + window.location.hostname + ":3000";
+        $rootScope.serverUrl = "http://192.168.0.102:3003";
 
 
         $rootScope.isAuthenticated = function () {

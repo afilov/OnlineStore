@@ -58,7 +58,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
                     }
                 }
             })
-            .state('Categories_List', {
+            .state('Category_List', {
                 url: '^/categories',
                 menuGroup: 'management',
                 menuTitle: 'Categories',
@@ -70,23 +70,23 @@ app.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
                     }
                 }
             })
-            .state('Categories_Details', {
+            .state('Category_Details', {
                 url: '^/categories/:id',
-                parent: 'Categories_List',
+                parent: 'Category_List',
                 views: {
                     '@': {
                         templateUrl: 'app/scripts/category/category-details.view.html',
-                        controller: 'CategoryListCtrl'
+                        controller: 'CategoryDetailsCtrl'
                     }
                 }
             })
             .state('Category_New', {
                 url: '^/categories/new',
-                parent: 'Categories_List',
+                parent: 'Category_List',
                 views: {
                     '@': {
                         templateUrl: 'app/scripts/category/category-details.view.html',
-                        controller: 'CategoryListCtrl'
+                        controller: 'CategoryDetailsCtrl'
                     }
                 }
             })

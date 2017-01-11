@@ -19,31 +19,46 @@
                 <div class="md-toolbar-tools">
                     <h3>Product</h3>
                 </div>
+                <md-button ng-show="IsNew" type="submit"
+                           class="md-raised md-primary"
+                           ng-click="CreateProduct()">Create
+                </md-button>
+                <md-button ng-show="!IsNew" ng-disabled="!projectForm.$dirty" class="md-raised md-info"
+                           ng-click="UpdateProduct()">Save
+                </md-button>
                 <md-button ng-if="IsNew == false" ng-click="DeleteProduct()" class="md-raised md-warn">
                     Delete
                 </md-button>
+
             </md-toolbar>
             <md-card-content>
                 <form name="projectForm" class="form-horizontal">
                     <md-input-container class="md-block">
                         <label>Name</label>
                         <input type="text" ng-model="currentProduct.Name"/>
-                    </md-input-container><br>
+                    </md-input-container>
+                    <br>
                     <md-input-container class="md-block">
                         <label>Price</label>
                         <input type="number" ng-model="currentProduct.Price"/>
-                    </md-input-container><br>
+                    </md-input-container>
+                    <br>
                     <md-input-container class="md-block">
                         <label>Description</label>
                         <input type="text" ng-model="currentProduct.Description"/>
-                    </md-input-container><br>
-                    <md-input-container class="md-block">
-                        <label>Select Category</label>
-                        <input type="text" ng-model="currentProduct.Category"/>
                     </md-input-container>
+                    <md-input-container class="md-block">
+                        <label>VAT</label>
+                        <input type="number" ng-model="currentProduct.VAT"/>
+                    </md-input-container>
+                    <br>
+                    <!--<md-input-container class="md-block">-->
+                    <!--<label>Select Category</label>-->
+                    <!--<input type="text" ng-model="currentProduct.Category"/>-->
+                    <!--</md-input-container>-->
                     <md-input-container class="md-block" ng-if="IsNew == false">
                         <label>Created On</label>
-                        <input type="date" ng-disabled="true" ng-model="currentProduct.CreatedOn"/>
+                        <input type="date" ng-disabled="!IsNew" ng-model="currentProduct.CreatedOn"/>
                     </md-input-container>
                 </form>
             </md-card-content>

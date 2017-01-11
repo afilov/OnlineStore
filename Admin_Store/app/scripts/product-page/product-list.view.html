@@ -20,10 +20,12 @@
                     <tr md-row ng-repeat="product in Products" style="line-height: 30px"
                         ng-click="goToDetails(product)">
                         <td md-cell>
-                            {{product.ID}}
+                            {{product._id}}
                         </td>
                         <td md-cell>
-                            {{product.Category}}
+                            <div ng-repeat="item in Categories" ng-if="item._id == product.CategoryId">
+                                {{item.Name}}
+                            </div>
                         </td>
                         <td md-cell>
                             {{product.Name}}
