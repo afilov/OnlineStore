@@ -1,0 +1,32 @@
+<md-card-content flex="100">
+
+    <div layout="row" layout-xs="column" layout-align="center center" style="margin-top: 15%;">
+
+        <div flex="40" layout="column" ng-cloak>
+            <md-content layout-padding flex="50">
+                <form name="projectForm">
+
+                    <md-input-container class="md-block">
+                        <label>Username</label>
+                        <input type="text" required name="description" ng-model="User.Username">
+
+                        <div ng-messages="User.Username.$error">
+                            <div ng-message="required">This is required.</div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container class="md-block">
+                        <label>Password</label>
+                        <input type="password" required name="clientName" md-minlength="8" ng-model="User.Password">
+
+                    </md-input-container>
+                    <md-button class="md-raised md-primary" type="submit" ng-click="Login()">Login</md-button>
+                    <div ng-show="InvalidAuthentication" class="help-block"
+                         style="color: red; float: right;margin-top: 15px;">
+                        <div>Invalid Authentication!</div>
+                    </div>
+                </form>
+            </md-content>
+        </div>
+    </div>
+
+</md-card-content>

@@ -1,0 +1,31 @@
+<md-card class="md-default-theme md-whiteframe-5dp" flex="50">
+            <md-toolbar layout="row">
+                <div class="md-toolbar-tools">
+                    <h3>Account settings</h3>
+                </div>
+            </md-toolbar>
+            <md-card-content>
+                <form name="projectForm" class="form-horizontal">
+                    <md-input-container class="md-block">
+                        <label>Name</label>
+                        <input type="text" ng-model="rootUser.Name"/>
+                    </md-input-container><br>
+                    <md-input-container class="md-block">
+                        <label>Username</label>
+                        <input type="text" ng-model="rootUser.Username"/>
+                    </md-input-container><br>
+                    <md-input-container class="md-block">
+                        <label>Password</label>
+                        <input type="text" ng-model="rootUser.Password"/><br><br>
+                        <md-button class="md-raised md-primary pull-right" ng-click="changePassword()">Change password</md-button>
+                    </md-input-container><br>
+                    <md-input-container class="md-block">
+                        <label>Created On</label>
+                        <input type="date" ng-disabled="true" ng-model="rootUser.CreatedOn"/>
+                    </md-input-container>
+                </form>
+            </md-card-content>
+        </md-card>
+<span flex="50"></span>
+
+
