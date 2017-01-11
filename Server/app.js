@@ -1,3 +1,3 @@
-/**
- * Created by NixDev on 11/27/2016.
- */
+"use strict";
+var ModuleLoader = require('./app/ModuleLoader.js');
+var Instance = new ModuleLoader();

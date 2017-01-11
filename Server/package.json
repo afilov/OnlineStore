@@ -1,0 +1,27 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "config": "^1.24.0",
+    "fs": "0.0.1-security",
+    "jsonfile": "^2.4.0",
+    "jsonwebtoken": "^7.1.9",
+    "mandrill-api": "^1.0.45",
+    "mongoose": "^4.7.0",
+    "path": "^0.12.7",
+    "paypal-rest-sdk": "^1.7.1",
+    "promise": "^7.1.1",
+    "request": "^2.79.0",
+    "restify": "^4.3.0",
+    "restify-cookies": "^0.2.2",
+    "restify-jwt": "^0.4.0",
+    "util": "^0.10.3"
+  }
+}
