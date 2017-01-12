@@ -1,0 +1,14 @@
+{
+  "serverport": 3003,
+  "tokenSecret":"FinkiOStoreShhh",
+  "mongoDB": "mongodb://localhost:27017/FinkiOStore",
+  "mailCredentials":"smtps://finkistore121%40gmail.com:pasvord123@smtp.gmail.com",
+  "paypal":{
+    "mode":"sandbox",
+    "client_id":"EBWKjlELKMYqRNQ6sYvFo64FtaRLRR5BdHEESmha49TM",
+    "client_secret":"EO422dn3gQLgDbuwqTjzrFgFtaRLRR5BdHEESmha49TM"
+  },
+  "dmsConfig":{
+    "folderpath":"uploads"
+  }
+}
