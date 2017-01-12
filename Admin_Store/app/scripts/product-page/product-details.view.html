@@ -43,6 +43,13 @@
                         <input type="number" ng-model="currentProduct.Price"/>
                     </md-input-container>
                     <br>
+                    <md-input-container>
+                        <label>Category</label>
+                        <md-select ng-model="currentProduct.CategoryId">
+                            <md-option ng-value="cat._id" ng-repeat="cat in Categories">{{ cat.Name }}</md-option>
+                        </md-select>
+                    </md-input-container>
+                    <br/>
                     <md-input-container class="md-block">
                         <label>Description</label>
                         <input type="text" ng-model="currentProduct.Description"/>
@@ -52,10 +59,13 @@
                         <input type="number" ng-model="currentProduct.VAT"/>
                     </md-input-container>
                     <br>
-                    <!--<md-input-container class="md-block">-->
-                    <!--<label>Select Category</label>-->
-                    <!--<input type="text" ng-model="currentProduct.Category"/>-->
-                    <!--</md-input-container>-->
+                    <md-input-container class="md-block">
+                        <label>Upload Picture</label><br>
+                        <div class="btn btn-info" ngf-select="upload($file)">
+                            Click here to upload file
+                        </div>
+                        <img ngf-thumbnail="file"><br><br>
+                    </md-input-container>
                     <md-input-container class="md-block" ng-if="IsNew == false">
                         <label>Created On</label>
                         <input type="date" ng-disabled="!IsNew" ng-model="currentProduct.CreatedOn"/>

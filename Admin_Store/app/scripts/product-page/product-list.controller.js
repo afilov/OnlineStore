@@ -1,9 +1,10 @@
 "use strict";
 
 
-app.controller('ProductListCtrl', ['$rootScope', 'Product', '$scope', '$state',
-    function ($rootScope, Product, $scope, $state) {
+app.controller('ProductListCtrl', ['$rootScope', 'Product', '$scope', '$state', 'Category',
+    function ($rootScope, Product, $scope, $state, Category) {
         var ProductInstance = new Product();
+        var CategoryInstance = new Category();
         $scope.Products = {};
         $scope.IsNew = false;
 
@@ -19,6 +20,10 @@ app.controller('ProductListCtrl', ['$rootScope', 'Product', '$scope', '$state',
             }, function (err) {
                 console.log(err)
             });
+            var promise2 = CategoryInstance.GetAllCategories();
+            promise2.then(function (data) {
+                $scope.Categories = data.data;
+            })
         };
         $scope.getAll();
 

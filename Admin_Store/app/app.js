@@ -6,7 +6,8 @@ var externalModules = [
     'ngMaterial',
     'ngAria',
     'md.data.table',
-    'mdPickers'
+    'mdPickers',
+    'ngFileUpload'
 ];
 
 var app = angular.module("MainApp", externalModules);
