@@ -1,0 +1,525 @@
+
+/* CSS used here will be applied after bootstrap.css */
+
+.demo {
+    padding:50px;
+}
+
+.demo label{
+    top:3px; left:15px;
+    margin-right:30px;
+    position:relative;
+}
+
+
+input.faChkRnd, input.faChkSqr {
+    visibility: hidden;
+}
+.huge {
+    font-size: 40px;
+}
+input.faChkRnd:checked:after, input.faChkRnd:after,
+input.faChkSqr:checked:after, input.faChkSqr:after {
+    visibility: visible;
+    font-family: FontAwesome;
+    font-size:25px;height: 17px; width: 17px;
+    position: relative;
+    top: -3px;
+    left: 0px;
+    background-color:#FFF;
+    display: inline-block;
+}
+
+input.faChkRnd:checked:after {
+    content: '\f058';
+}
+
+input.faChkRnd:after {
+    content: '\f10c';
+}
+
+input.faChkSqr:checked:after {
+    content: '\f14a';
+}
+
+input.faChkSqr:after {
+    content: '\f096';
+}
+
+ .fancy-checkbox span:before {
+     font-family: "FontAwesome";
+     font-style: normal;
+     width: 1em;
+     height: 1em;
+     content: '\f10c';
+     margin-right: .3em;
+ }
+
+.panel-heading button,
+.panel-heading select,
+.panel-heading a{
+    float:right;
+    margin:0;
+    margin-left: 5px;
+    margin-top: -5px;
+}
+ /*table tbody tr td:nth-child(1){*/
+     /*max-width: 2px;*/
+     /*background-color: black;*/
+
+ /*}*/
+ table{
+     /*table-layout: fixed;*/
+ }
+ .NoLayout table{
+     table-layout: auto;
+ }
+
+.drop-box {
+  background: #F8F8F8;
+  border: 5px dashed #DDD;
+  width: 200px;
+  height: 65px;
+  text-align: center;
+  padding-top: 25px;
+  margin: 10px;
+}
+
+.dragover {
+  border: 5px dashed blue;
+}
+.DmsDirective li{
+  cursor: pointer;
+}
+
+
+.companyModalBtn{
+    margin:0;
+}
+ /*form p{*/
+     /*padding-top: 8px;*/
+ /*}*/
+
+.percentInput { position:relative; display: inline-block; }
+.percentInput span { position: absolute; top:2px; right: 4px; line-height:100%; vertical-align: middle; }
+.num_percent { width:50%; text-align: left; padding-right: 15px; }
+.form-right-btn button{
+    margin:0;
+}
+table button{
+    margin:0;
+}
+
+.textInput{
+    text-align: left;
+}
+.numberInput{
+    text-align: right;
+    /*width: 100px;*/
+}
+.dataInput{
+    text-align: center;
+}
+
+ /*Delete row button*/
+.buttonX{
+    padding-top: 9px !important;
+    cursor:pointer;
+    width: 100%;
+    height: 100%;
+}
+.buttonTd{
+    background-color: white !important;
+    box-shadow:none !important;
+    width: 1% !important;
+}
+
+.showMenu {
+    display: none !important;
+}
+table th{
+    padding: 0 !important;
+}
+/*Table row Focus and hover*/
+ table tbody tr{
+     box-shadow:0 3px 8px rgba(0,0,0,0.3) !important;
+     padding-bottom: 23px;
+ }
+ table tbody tr:hover{
+     box-shadow:0 3px 8px rgba(0,0,0,0.3) !important;
+     border-color: black;
+     /*border-bottom: 2px solid black;*/
+ }
+ table tbody tr:focus{
+     /*border:1px solid #aaa;*/
+     box-shadow:0 3px 8px rgba(0,0,0,0.3) !important;
+     border-color: black;
+
+ }
+
+ table tbody tr:hover{
+     /*/!*border:1px solid #aaa;*!!*     !*background:#eee;*!*/
+     box-shadow:23px 3px 8px rgba(0,0,0,20);
+ }
+
+.form-group{
+    min-height: 40px;
+}
+.textPadding{
+    padding-left: 12px;
+    padding-top: 7px;
+    /*padding-right: 20px;*/
+}
+input{
+    border-top: 0px !important;
+    border-left: 0px !important;
+    border-right: 0px !important;
+    border-radius: 0 !important;
+}
+ input.form-control:focus{border-color: black !important;  box-shadow: 0 4px 2px -2px black  }
+ textarea.form-control:focus{border-color: black !important; box-shadow: 0 4px 2px -2px black  }
+ select.form-control:focus{border-color: black !important;box-shadow: 0 4px 2px -2px black }
+
+ /*textarea:focus,*/
+ /*input[type="text"]:focus,*/
+ /*input[type="password"]:focus,*/
+ /*input[type="datetime"]:focus,*/
+ /*input[type="datetime-local"]:focus,*/
+ /*input[type="date"]:focus,*/
+ /*input[type="month"]:focus,*/
+ /*input[type="time"]:focus,*/
+ /*input[type="week"]:focus,*/
+ /*input[type="number"]:focus,*/
+ /*input[type="email"]:focus,*/
+ /*input[type="url"]:focus,*/
+ /*input[type="search"]:focus,*/
+ /*input[type="tel"]:focus,*/
+ /*input[type="color"]:focus,*/
+ /*select:focus,*/
+ /*textarea:focus{*/
+     /*border-color: black;*/
+     /*box-shadow: 0 1px 1px black inset, 0 0 8px black;*/
+     /*outline: 0 none;*/
+ /*}*/
+table td{
+    padding: 0 !important;
+    /*padding-right: 8px !important;*/
+}
+ table td input {
+     border-bottom: 0px !important;
+ }
+
+ p{
+     margin: 0 0 7px !important;
+ }
+ tr .buttonX {
+     visibility: hidden;
+ }
+ tr:hover .buttonX {
+     visibility: visible;
+ }
+
+ table div{
+     overflow: hidden;
+     white-space: nowrap;
+ }
+ .noEditableSelect{
+     margin: 0 !important;
+     padding: 0 !important;
+     border: 0 !important;
+ }
+ /*.OfferNumber,*/
+ /*.InvoiceNumber{*/
+     /*width: 6% !important;*/
+ /*}*/
+ .ID{
+     width: 1% !important;
+     text-align: right;
+ }
+ /*.Name,*/
+ /*.SupplierName,*/
+ /*.ExpenseName,*/
+ /*.CompanyName,*/
+ /*.ProductName,*/
+ /*.FileName{*/
+     /*width: 50%;*/
+     /*text-align: left !important;*/
+ /*}*/
+ /*table td{*/
+ /*}*/
+ /*.ExpenseGroupID{*/
+     /*width: 11%;*/
+ /*}*/
+
+ .customCreated {
+     border-bottom: 1px solid red !important;
+
+ }
+
+ .newField{
+     height: 35px;
+     width: 100%;
+     margin-top: -20px;
+     padding: 0;
+     color: transparent;
+     border-bottom: 1px solid lightgrey;
+     border-top: 1px solid lightgrey;
+     overflow: hidden;
+     cursor: cell ;
+ }
+ .newField:hover{
+     color: #000;
+     cursor: text ;
+
+ }
+ .table-responsive{
+     overflow: visible;
+ }
+
+ table select,
+ table textarea{
+     border: 0 !important;
+     cursor:pointer;
+ }
+
+ /*.SinglePrice{*/
+     /*min-width: 100px;*/
+     /*text-align: right;*/
+     /*padding-right: 0px !important;*/
+ /*}*/
+
+ /*Default to all 6% width*/
+ .VAT,
+ .Total,
+ .TotalAmount,
+ .Quantity,
+ .TotalPrice,
+ .Status,
+ .ExpenseStatus,
+ .InvoiceStatus,
+ .City,
+ .Country,
+ .Number,
+ .Enabled{
+     width: 8% !important;
+ }
+
+ .Total,
+ .TotalPrice,
+ .SinglePrice,
+ .Quantity,
+ .Status,
+ .TotalAmount{
+     text-align: right !important;
+
+ }
+md-table-pagination .label{
+    color: black !important;
+}
+.dateLabel{
+    color:rgba(0,0,0,0.54);
+    font-weight: 700;
+    font-size: 11px !important;
+}
+.md-datepicker-button{
+    padding: 0 !important;
+    margin: 0 !important;
+    text-align: left !important;
+}
+.md-datepicker-input-container{
+    margin:0 !important;
+}
+.md-datepicker-input-container {
+    width: 100%;
+    margin-left: 0px;
+}
+md-checkbox{
+    width:100%;
+}
+md-checkbox .md-container{
+    left:auto !important;
+    right: 0 !important;
+}
+
+md-checkbox .md-label{
+    margin-left:0 !important;
+}
+
+
+
+
+
+/*Links width*/
+ /*.URL{*/
+     /*width: 10%;*/
+ /*}*/
+
+ /*!*Type and Date width*!*/
+ /*.Type,*/
+ /*.Date,*/
+ /*.DueDate,*/
+ /*.DateCreated,*/
+ /*.InvoiceDate,*/
+ /*.Email{*/
+     /*width: 6% !important;*/
+
+ /*}*/
+ /*.StartDate,*/
+ /*.OfferDate,*/
+ /*.OfferDueDate,*/
+ /*.EndDate{*/
+     /*width: 6% !important;*/
+ /*}*/
+
+  /*Currency width , TotalAmount width Funds*/
+ .CurrencyID,
+ .FromCurrencyID,
+ .ToCurrencyID,
+ .Currency{
+     width: 5% !important;
+ }
+ .Currencies .FromCurrencyID,
+ .Currencies .ToCurrencyID{
+     width: 40% !important;
+ }
+ .TotalAmount,
+ .SinglePrice{
+     width: 8%;
+     text-align:right;
+     padding-right: 0px !important;
+ }
+ .FromFunds,
+ .ToFunds,
+ .Funds{
+     width: 6%;
+     text-align:right;
+     padding-right: 0px !important;
+ }
+ .Address,
+ .City,
+ .Country{
+     width: 10%;
+ }
+
+ .totals .col-sm-8{
+    padding-right: 28px;
+     padding-left: 45px;
+ }
+ .totals .col-sm-4{
+     padding: 0 !important;
+ }
+ .totals form .col-sm-4{
+     padding-left: 25px !important;
+ }
+
+ .navbarUl li{
+     cursor: pointer;
+ }
+
+
+.ClubID, .Price, .GreenFees, .Currency{
+    width:1% !important;
+}
+.GolfID{
+    width:10%;
+}
+.val_GolfID{
+    text-align:center;
+}
+.val_FirstName p, .val_LastName p{
+    text-align:left;
+}
+.val_GreenFees p, .val_Price p{
+    text-align:right;
+}
+.val_Currency p{
+    text-align:left;
+}
+th.Name{
+    padding-left:12px !important;
+}
+ /*Angular matirial*/
+
+md-input-container{
+    margin-bottom: 0 !important;
+    /*margin-top: 0 !important;*/
+    /*background-color: white !important;*/
+}
+md-input-container .md-errors-spacer{
+    min-width: 0 !important;
+}
+
+table md-input-container{
+    margin-top: 0 !important;
+    /*background-color: white !important;*/
+}
+md-input-container input[type="number"]{
+    text-align:right !important;
+}
+
+/*md-input-container input[type="number"]:not([readonly]):not([disabled]){*/
+    /*text-align:right !important;*/
+/*}*/
+
+
+md-datepicker.md-default-theme, md-datepicker{
+    background-color: transparent;
+}
+.md-whiteframe-17dp{
+    background-color: white;
+    padding: 25px;
+    border-radius: 2%;
+    margin-bottom: 25px;
+}
+.md-whiteframe-17dp button{
+    margin-right: 5px;
+}
+md-fab-actions button{
+ margin-right: 8px;
+}
+md-fab-actions md-button{
+    margin-left: 50px ;
+ }
+
+/*.fabSpeedDialdemoBasicUsage .text-capitalize {*/
+    /*text-transform: capitalize; }*/
+/*.fabSpeedDialdemoBasicUsage .md-fab:hover, .fabSpeedDialdemoBasicUsage .md-fab.md-focused {*/
+    /*background-color: #000 !important; }*/
+/*.fabSpeedDialdemoBasicUsage p.note {*/
+    /*font-size: 1.2rem; }*/
+/*.fabSpeedDialdemoBasicUsage .lock-size {*/
+    /*min-width: 300px;*/
+    /*min-height: 300px;*/
+    /*width: 300px;*/
+    /*height: 300px;*/
+    /*margin-left: auto;*/
+    /*margin-right: auto; }*/
+
+.subactive {
+    background-color: lightgrey;
+}
+.active {
+    background-color: lightskyblue;
+}
+.rowError{
+    background-color: darkred;
+}
+.rowPending{
+    background-color: yellow;
+}
+.rowSuccess{
+    background-color: green;
+}
+
+.groupRow {
+    text-align: center;
+    font-weight: 700;
+    height: 24px !important;
+}
+
+.groupRow > td {
+    text-align: center !important;
+}
+md-autocomplete{
+    background-color: white;
+}

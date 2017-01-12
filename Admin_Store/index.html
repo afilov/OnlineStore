@@ -3,28 +3,162 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title></title>
+
+    <!--BOWER COMPONENTS-->
+    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="bower_components/angular-material/angular-material.min.js"></script>
+    <script src="bower_components/angular-material/angular-material-mocks.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.min.js"></script>
+    <script src="bower_components/angular-aria/angular-aria.min.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script src="bower_components/angular-material-data-table/dist/md-data-table.min.js"></script>
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/ngstorage/ngStorage.min.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
+    <script src="bower_components/mdPickers/dist/mdPickers.min.js"></script>
+    <script src="bower_components/ngToast/dist/ngToast.min.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.min.js"></script>
+    <script src="bower_components/ng-file-upload/ng-file-upload.min.js"></script>
+    <script src="bower_components/ng-file-upload/ng-file-upload-shim.min.js"></script>
+
+    <!--APP CSS-->
+    <link rel="stylesheet" href="bower_components/angular-material/angular-material.css">
+    <link href="bower_components/angular-material-data-table/dist/md-data-table.min.css" rel="stylesheet"
+          type="text/css"/>
+    <link href="bower_components/ngToast/dist/ngToast.min.css" rel="stylesheet"
+          type="text/css"/>
+    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"
+          type="text/css"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="css/theme-more.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="css/css/font-awesome.min.css">
+
+
+    <!--APP SCRIPTS-->
+    <script src="app/app.js"></script>
+    <script src="app/routes.js"></script>
+
+
+    <!--FACTORIES-->
+    <script src="app/services/product/Product-factory.js"></script>
+    <script src="app/services/category/Category-factory.js"></script>
+
+    <!--SERVICES-->
+    <script src="app/services/product/Product-service.js"></script>
+    <script src="app/services/category/Category-service.js"></script>
+
+    <!--DIRECTIVES-->
+    <script src="app/scripts/directives/notifications/notifications.js"></script>
+
+    <script src="app/scripts/directives/stats/stats.js"></script>
+
+    <!--CONTROLLERS-->
+    <script src="app/scripts/default-page/default-page.controller.js"></script>
+    <script src="app/scripts/login-page/login-page.controller.js"></script>
+
+    <script src="app/scripts/product-page/product-list.controller.js"></script>
+    <script src="app/scripts/product-page/product-details.controller.js"></script>
+
+    <script src="app/scripts/category/category-list.controller.js"></script>
+    <script src="app/scripts/category/category-details.controller.js"></script>
+
+    <script src="app/scripts/paypal/paypal.controller.js"></script>
+
+    <script src="app/scripts/settings/settings.controller.js"></script>
+
+    <script src="app/scripts/reports/reports.controller.js"></script>
+
 </head>
 
-<!--BOWER COMPONENTS-->
-<script src="bower_components/angular/angular.min.js"></script>
-<script src="bower_components/angular-material/angular-material.min.js"></script>
-<script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
-<script src="bower_components/angular-material-data-table/dist/md-data-table.min.js"></script>
-<script src="bower_components/jquery/dist/jquery.min.js"></script>
-<script src="bower_components/ngstorage/ngStorage.min.js"></script>
+<body ng-app="MainApp" class="layout-row" style="overflow: hidden" ng-controller="MainCtrl">
 
-<!--APP CSS-->
-<link rel="stylesheet" ui-sref="bower_components/angular-material/angular-material.min.css">
+<div ng-if="$root.isAuthenticated()" style="height:100%">
+    <md-sidenav class="md-sidenav-left md-whiteframe-z2 hide-print _md-closed ng-isolate-scope _md-locked-open"
+                md-component-id="left"
+                style="height: 100%"
+                md-is-locked-open="$mdMedia('gt-md')"
+                md-whiteframe="4">
+        <md-toolbar layout="row">
+            <div class="md-toolbar-tools">
+                <h2>
+                    <span>{{$root.PageTitle}}</span>
+                </h2>
+                <span flex></span>
+                <md-button class="md-icon-button" aria-label="Close Side Panel" ng-if="!mdSidenavIsOpen()"
+                           ng-click="$root.closeSideNavPanel()">
+                    <md-tooltip>Close</md-tooltip>
+                    <md-icon class="md-default-theme" class="material-icons">&#xE5CD;</md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
 
-<!--APP SCRIPTS-->
-<script src="app/app.js"></script>
-<script src="app/routes.js"></script>s
+        <md-content layout-padding="">
+            <md-list>
+                <md-subheader class="md-no-sticky">Main Menu</md-subheader>
 
-<!--CONTROLLERS-->
-<script src="app/scripts/default-page/default-page.controller.js"></script>
+                <md-list-item ng-repeat="menuItem in $root.mainMenu"
+                              ng-class="$root.GetActiveClass(menuItem)"
+                              ng-click="$root.RootMenuItemClicked(menuItem)">
+                    <p>{{menuItem.Title}}</p>
+                </md-list-item>
+            </md-list>
+            <md-list>
+                <md-subheader class="md-no-sticky">Sub Menu</md-subheader>
+                <div ng-repeat="menuGroup in $root.mainMenu" ng-if="$root.IsGroupSelected(menuGroup)">
+                    <md-list-item ng-repeat="menuItem in menuGroup.Children"
+                                  ng-click="$root.MenuItemClicked(menuItem)" ng-class="$root.GetActiveClass(menuItem)">
+                        <p>{{menuItem.menuTitle}}</p>
+                    </md-list-item>
+                </div>
+            </md-list>
+        </md-content>
+    </md-sidenav>
+</div>
 
-<body ng-app="MainApp">
+<div layout="column" tabindex="-1" role="main" flex="" class="layout-column flex" ng-controller="MainCtrl"
+     ng-if="$root.isAuthenticated()">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <md-button class="md-icon-button" aria-label="Icon" ng-click="$root.openSideNavPanel()"
+                       ng-if="!mdSidenavIsOpen()">
 
+                <md-tooltip>Menu</md-tooltip>
+                <i class="material-icons">view_headline</i>
+            </md-button>
+
+            <div>
+                    <span ng-repeat="activeState in $root.activeStates">
+                        <a ng-click="$root.MenuItemClicked(activeState)">{{activeState.Title || activeState.menuTitle ||
+                            activeState.name}} \</a>
+                    </span>
+            </div>
+
+            <span flex></span>
+
+            <md-menu md-offset="0 -7">
+                <md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdOpenMenu($event)">
+                    <i class="material-icons">person_pin</i>
+                </md-button>
+                <md-menu-content width="2">
+                    <md-menu-item>
+                        <md-button ng-click="Logout()"><span md-menu-align-target>Log out</span></md-button>
+                    </md-menu-item>
+                </md-menu-content>
+            </md-menu>
+        </div>
+    </md-toolbar>
+    <md-content flex layout-padding md-scroll-y class="layout-column flex" style="margin-left:1px">
+
+        <div ui-view name="">
+
+        </div>
+    </md-content>
+</div>
+
+
+<div ng-if="$root.isAuthenticated() == false" layout="center center" flex="100"
+     ng-include="'app/scripts/login-page/login-page.view.html'" ng-controller="UserLoginCtrl">
+</div>
 
 
 </body>

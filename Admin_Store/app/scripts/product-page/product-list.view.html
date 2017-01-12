@@ -1,0 +1,46 @@
+<md-card class="md-default-theme">
+    <div class="md-toolbar-tools">
+        <span flex></span>
+        <md-button class="md-raised md-primary" ng-click="CreateNew()">Add new product</md-button>
+    </div>
+    <md-card-content>
+        <div flex>
+            <md-table-container>
+                <table md-table align="center">
+                    <thead md-head>
+                    <tr md-row>
+                        <th md-column>ID</th>
+                        <th md-column>Product Category</th>
+                        <th md-column>Product Name</th>
+                        <th md-column>Product Price</th>
+                        <th md-column>Date Created</th>
+                    </tr>
+                    </thead>
+                    <tbody class="md-body-1">
+                    <tr md-row ng-repeat="product in Products" style="line-height: 30px"
+                        ng-click="goToDetails(product)">
+                        <td md-cell>
+                            {{product._id}}
+                        </td>
+                        <td md-cell>
+                            <div ng-repeat="item in Categories" ng-if="item._id == product.CategoryId">
+                                {{item.Name}}
+                            </div>
+                        </td>
+                        <td md-cell>
+                            {{product.Name}}
+                        </td>
+                        <td md-cell>
+                            {{product.Price}}
+                        </td>
+                        <td md-cell>
+                            {{product.CreatedOn | date : "dd.MM.y"}}
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </md-table-container>
+        </div>
+    </md-card-content>
+</md-card>
+

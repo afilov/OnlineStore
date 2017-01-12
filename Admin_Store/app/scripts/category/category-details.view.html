@@ -1,0 +1,50 @@
+<md-card class="md-default-theme">
+
+    <div class="md-toolbar-tools">
+        <h2>
+            <span>Category Details</span>
+        </h2>
+        <span flex></span>
+        <md-button type="submit" class="md-raised md-warn"
+                   ui-sref="Category_List">
+            Back
+        </md-button>
+        <span></span>
+        <!--buttons-->
+
+    </div>
+    <div layout="row">
+        <md-card class="md-default-theme md-whiteframe-5dp" flex>
+            <md-toolbar layout="row">
+                <div class="md-toolbar-tools">
+                    <h3>Category</h3>
+                </div>
+                <md-button ng-show="IsNew" type="submit"
+                           class="md-raised md-primary"
+                           ng-click="CreateCategory()">Create
+                </md-button>
+                <md-button ng-show="!IsNew" ng-disabled="!projectForm.$dirty" class="md-raised md-info"
+                           ng-click="UpdateCategory()">Save
+                </md-button>
+                <md-button ng-if="IsNew == false" ng-click="DeleteCategory()" class="md-raised md-warn">
+                    Delete
+                </md-button>
+
+            </md-toolbar>
+            <md-card-content>
+                <form name="projectForm" class="form-horizontal">
+                    <md-input-container class="md-block">
+                        <label>Name</label>
+                        <input type="text" ng-model="currentCategory.Name"/>
+                    </md-input-container>
+                    <md-input-container class="md-block" ng-if="IsNew == false">
+                        <label>Created On</label>
+                        <input type="date" ng-disabled="!IsNew" ng-model="currentCategory.CreatedOn"/>
+                    </md-input-container>
+                </form>
+            </md-card-content>
+        </md-card>
+    </div>
+    </div>
+</md-card>
+

@@ -1,10 +1,57 @@
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
+<md-card class="md-default-theme">
+    <div class="md-toolbar-tools">
+        <span flex></span>
+    </div>
+    <div layout="row">
+            <stats flex="30" number="4" comments="New orders!" colour="primary" type="shopping-cart"></stats>
+            <stats number="3"flex="30" comments="Support tickets!" colour="success" type="support"></stats>
+        <span flex="5"></span>
+        <div flex="35">
+            <notifications></notifications>
+        </div>
+    </div>
+    <md-card-content>
+        <div flex="70">
+            <md-table-container>
+                <table md-table>
+                    <thead md-head>
+                    <tr md-row>
+                        <th md-column colspan="4">Recently bought products</th>
+                    </tr>
+                    <tr md-row>
+                        <th md-column>Product Name</th>
+                        <th md-column>Category</th>
+                        <th md-column>Quantity bought</th>
+                        <th md-column>Income</th>
+                    </tr>
+                    </thead>
+                    <tbody class="md-body-1">
+                    <tr md-row ng-repeat="product in Products" style="line-height: 30px"
+                        ng-click="goToDetails(product)">
+                        <td md-cell>
+                            {{product.Name}}
+                        </td>
+                        <td md-cell>
+                            {{product.Category}}
+                        </td>
+                        <td md-cell>
+                            {{product.boughtQuantity}}
+                        </td>
+                        <td md-cell>
+                            + {{product.Income}}
+                        </td>
 
-</body>
-</html>
+                    </tr>
+                    </tbody>
+                </table>
+            </md-table-container>
+            <md-table-pagination md-limit="5" md-limit-options="[5, 10, 15]" md-page="1" md-total="{{Products.count}}"
+                                 md-page-select></md-table-pagination>
+
+        </div>
+
+
+    </md-card-content>
+
+</md-card>
+
