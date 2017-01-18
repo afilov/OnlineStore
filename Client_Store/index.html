@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title></title>
 
-
+    <!--BOWER COMPONENTS-->
     <script src="bower_components/angular/angular.min.js"></script>
     <script src="bower_components/angular-material/angular-material.min.js"></script>
     <script src="bower_components/angular-material/angular-material-mocks.js"></script>
@@ -15,8 +15,49 @@
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
     <script src="bower_components/ngstorage/ngStorage.min.js"></script>
     <script src="bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
-</head>
-<body>
 
+    <!--SCRIPTS-->
+    <script src="scripts/app.js"></script>
+    <script src="scripts/routes.js"></script>
+
+    <!--CONTROLLERS-->
+    <script src="scripts/controller-Main.js"></script>
+
+    <!--FACTORIES/SERVICES/DIRECTIVES-->
+    <script src="scripts/directives/navigation-menu.js"></script>
+    <script src="scripts/directives/category-menu.js"></script>
+    <script src="scripts/directives/products.js"></script>
+
+    <!--CSS-->
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="bower_components/angular-material/angular-material.css">
+    <link rel="stylesheet" href="css/ionicons.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+
+</head>
+<body ng-app="clientApp" ng-controller="MainCtrl">
+<navigation-menu></navigation-menu>
+
+<div class="page-header">
+    <div class="container">
+        <h1><span class="glyphicon glyphicon-barcode"></span> OStore
+            <small>Buy cheap shit</small>
+        </h1>
+    </div>
+</div>
+<div class="container">
+    <category-menu></category-menu>
+</div>
+
+<div ui-view=""></div>
+
+<div class="container">
+    <div class="row">
+        <md-list>
+            <products></products>
+        </md-list>
+    </div>
+</div>
 </body>
 </html>

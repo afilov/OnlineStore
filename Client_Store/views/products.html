@@ -1,0 +1,21 @@
+<md-list-item class="col-md-3 col-md-offset-1 well well-sm">
+    <div>
+        <div class="thumbnail">
+            <img src="http://placehold.it/300x200"/>
+        </div>
+        <h4>{{product.Name}} Test</h4>
+
+        <p class="details">
+            {{product.Description}} asd sad asd sa das d asd as
+        </p>
+        <h4 class="pull-right">{{product.Price}} $</h4><br><br>
+        <section layout="row" class="text-right">
+            <md-button class="md-raised md-primary">
+                <span class="glyphicon glyphicon-plus" ng-click="addToCart()"></span> cart
+            </md-button>
+            <md-button class="md-raised md-warn">
+                <span class="glyphicon glyphicon-plus" ng-click="addToWishlist()"></span> wishlist
+            </md-button>
+        </section>
+    </div>
+</md-list-item>
