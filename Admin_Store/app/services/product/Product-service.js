@@ -6,6 +6,7 @@ app.service("Product", ['ProductFactory', '$rootScope', '$q', function (ProductF
         this.Description = null;
         this.CategoryId = null;
         this.ImageURL = null;
+        this.FileId = null;
         this.VAT = null;
         this.CreatedOn = new Date();
         if (angular.isDefined(data) == true) {
