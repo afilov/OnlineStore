@@ -1,3 +1,4 @@
+"use strict";
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var extend = require('util')._extend;
@@ -94,7 +95,7 @@ Method.Create = function (req, res, next) {
         var tmpProduct = new RefModules.Product(req.body);
         ProductModel.create(tmpProduct, function (err, product) {
             if (err) {
-                Restify.RespondError(res, "DB Error");
+                Restify.RespondError(res,401, "DB Error");
             }
             else {
                 Restify.RespondSuccess(res, product);

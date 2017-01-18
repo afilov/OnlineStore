@@ -22,12 +22,12 @@ app.run(['$rootScope', 'ngToast', '$localStorage', '$q', '$location', '$mdToast'
         $rootScope.User = null;
 
         $rootScope.serverPath = window.location.hostname + ":3000";
-        $rootScope.serverUrl = "http://192.168.0.102:3003";
+        $rootScope.serverUrl = "http://192.168.0.104:3003";
 
 
         $rootScope.isAuthenticated = function () {
-            if ($localStorage.Data && $localStorage.Data.User && $localStorage.Data.User != $rootScope.User) {
-                $rootScope.User = $localStorage.Data.User;
+            if ($localStorage.Data && $localStorage.Data && $localStorage.Data != $rootScope.User) {
+                $rootScope.User = $localStorage.Data;
             }
             return $rootScope.User != null;
         };

@@ -5,6 +5,7 @@ module.exports = function Restify () {
     var jwthelper = require('jsonwebtoken');
     var path = require('path');
     var fs = require('fs');
+    var jwthelper = require('jsonwebtoken');
 
 
 
@@ -60,6 +61,10 @@ module.exports = function Restify () {
         this.SetResponse = function (response) {
             response.end(this.GetJSON());
         }.bind(this);
+    };
+
+    this.CreateToken = function (data) {
+        return jwthelper.sign(data,OStore.Config.tokenSecret);
     };
 
     this.ExtGetServices = {};

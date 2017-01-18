@@ -23,7 +23,7 @@
                            class="md-raised md-primary"
                            ng-click="CreateProduct()">Create
                 </md-button>
-                <md-button ng-show="!IsNew" ng-disabled="!projectForm.$dirty" class="md-raised md-info"
+                <md-button ng-show="!IsNew" class="md-raised md-info"
                            ng-click="UpdateProduct()">Save
                 </md-button>
                 <md-button ng-if="IsNew == false" ng-click="DeleteProduct()" class="md-raised md-warn">
@@ -59,17 +59,21 @@
                         <input type="number" ng-model="currentProduct.VAT"/>
                     </md-input-container>
                     <br>
+                    <md-input-container class="md-block" ng-if="IsNew == false">
+                        <label>Created On</label>
+                        <input type="date" ng-disabled="!IsNew" ng-model="currentProduct.CreatedOn"/>
+                    </md-input-container>
+                    <br/>
                     <md-input-container class="md-block">
                         <label>Upload Picture</label><br>
                         <div class="btn btn-info" ngf-select="upload($file)">
                             Click here to upload file
                         </div>
-                        <img ngf-thumbnail="file"><br><br>
                     </md-input-container>
-                    <md-input-container class="md-block" ng-if="IsNew == false">
-                        <label>Created On</label>
-                        <input type="date" ng-disabled="!IsNew" ng-model="currentProduct.CreatedOn"/>
-                    </md-input-container>
+                    <br/>
+                    <img style="width:200px;height:150px;" src="{{currentProduct.ImageURL}}"><br><br>
+                    <p style="color:red;"><small><b>*<b/> Image will change after saving or updating the product.</small></p>
+                    <p style="color:red;"><small><b>*</b> Refreshing the page will not making any changes</small></p>
                 </form>
             </md-card-content>
         </md-card>

@@ -1,3 +1,4 @@
+"use strict";
 module.exports = function Mailer () {
 
     var config = global.OStore.Config;

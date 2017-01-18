@@ -8,6 +8,7 @@ app.controller('ProductDetailsCtrl', ['$rootScope', 'Product', '$scope', '$state
         $scope.currentProduct = null;
         $scope.CurrentID = null;
         $scope.IsNew = true;
+        var fileId = null;
 
         if ($stateParams.id != "" && $stateParams.id != undefined && $stateParams.id != "new") {
             $scope.IsNew = false;
@@ -15,6 +16,7 @@ app.controller('ProductDetailsCtrl', ['$rootScope', 'Product', '$scope', '$state
             var promise = ProductInstance.GetProductByID($scope.CurrentID);
             promise.then(function (product) {
                 $scope.currentProduct = product;
+                fileId = product.FileId;
                 $scope.currentProduct.CreatedOn = new Date($scope.currentProduct.CreatedOn);
             });
         }
@@ -27,6 +29,7 @@ app.controller('ProductDetailsCtrl', ['$rootScope', 'Product', '$scope', '$state
             $scope.Categories = data.data;
         });
 
+
         $scope.DeleteProduct = function () {
             var promise = $scope.currentProduct.DeleteProduct();
             promise.then(function (data) {
@@ -34,17 +37,21 @@ app.controller('ProductDetailsCtrl', ['$rootScope', 'Product', '$scope', '$state
             });
         };
         $scope.CreateProduct = function () {
-            var promise = $scope.currentProduct.CreateProduct();
-            promise.then(function (res) {
-                $rootScope.showActionToast('Product Saved');
-                $state.go('Category_List');
+            $scope.uploadFile(function () {
+                var promise = $scope.currentProduct.CreateProduct();
+                promise.then(function (res) {
+                    $rootScope.showActionToast('Product Saved');
+                    $state.go('Product_List');
+                });
             });
         };
 
         $scope.UpdateProduct = function () {
-            var promise = $scope.currentProduct.UpdateProduct();
-            promise.then(function (res) {
-                $rootScope.showActionToast("Product updated");
+            $scope.uploadFile(function () {
+                var promise = $scope.currentProduct.UpdateProduct();
+                promise.then(function (res) {
+                    $rootScope.showActionToast("Product updated");
+                });
             });
         };
 
@@ -58,17 +65,35 @@ app.controller('ProductDetailsCtrl', ['$rootScope', 'Product', '$scope', '$state
 
         // upload on file select or drop
         $scope.upload = function (file) {
-            Upload.upload({
-                url: $rootScope.serverUrl + "/product/attachment",
-                data: {file: file, 'username': $scope.username}
-            }).then(function (resp) {
-                console.log('Success ' + resp.config.data.file.name + ' uploaded. Response: ' + resp.data);
-            }, function (resp) {
-                console.log('Error status: ' + resp.status);
-            }, function (evt) {
-                var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-                console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
-            });
+            $scope.file = file;
+        };
+
+        $scope.uploadFile = function (callBack) {
+            if (fileId == $scope.currentProduct.FileId){
+                callBack();
+            }
+            else {   var fileId = null;
+                var data = {};
+                data.file = $scope.file;
+                if (angular.isDefined($scope.currentProduct.FileId) == true && $scope.currentProduct.FileId != null) {
+                    fileId = $scope.currentProduct.FileId;
+                    data.fileId = fileId;
+                }
+                Upload.upload({
+                    url: $rootScope.serverUrl + "/product/attachment",
+                    data: data
+                }).then(function (resp) {
+                    console.log('Success ' + resp.config.data.file.name + ' uploaded. Response: ' + resp.data);
+                    $scope.currentProduct.ImageURL = $rootScope.serverUrl + "/product/attachment/download/" + resp.data._id;
+                    callBack();
+                    $scope.currentProduct.FileId = resp.data._id;
+                }, function (resp) {
+                    console.log('Error status: ' + resp.status);
+                }, function (evt) {
+                    var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+                    console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+                });}
+
         };
 
     }]);

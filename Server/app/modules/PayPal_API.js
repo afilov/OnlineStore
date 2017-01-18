@@ -1,3 +1,4 @@
+"use strict";
 module.exports = function Mandrill_API () {
     var paypal = require('paypal-rest-sdk');
     var config = global.OStore.Config;

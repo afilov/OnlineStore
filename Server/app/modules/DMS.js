@@ -1,3 +1,4 @@
+"use strict";
 module.exports = function DMS() {
     var mongoose = require('mongoose');
     var config = global.OStore.Config;
@@ -21,22 +22,29 @@ module.exports = function DMS() {
                 var fileName = name;
                 fs.readFile(File.path, function (err, data) {
                     if (err) {
-                        callBack(err,null);
+                        callBack(err, null);
                         return;
                     }
 
                     fs.writeFile(folderPath + '/' + fileName, data, function (err) {
                         if (err) {
-                            callBack(err,null);
+                            callBack(err, null);
                             return;
                         }
                         else {
                             var FileModel = mongoose.model('File');
                             var File = new FileModel();
-                            var uploadedFile = new RefModules.File({Name:orgName,RefName:fileName,PhysicalPath:folderPath+"/"+fileName,Extension:fileExtension,DateUploaded:new Date()});
+                            var uploadedFile = new RefModules.File({
+                                Name: orgName,
+                                RefName: fileName,
+                                PhysicalPath: folderPath + "/" + fileName,
+                                Extension: fileExtension,
+                                DateUploaded: new Date()
+                            });
+                            delete uploadedFile._id;
                             extend(File._doc, uploadedFile);
-                            File.save(function (err,result) {
-                                callBack(err,result);
+                            File.save(function (err, result) {
+                                callBack(err, result);
                             })
                         }
                     });
@@ -45,6 +53,48 @@ module.exports = function DMS() {
 
         }
     };
+
+    this.DeleteFile = function (FileID, callBack) {
+        if (!FileID) {
+            callBack("No data recieved", null);
+        }
+        else {
+            var FileModel = mongoose.model('File');
+            FileModel.findByIdAndRemove(FileID, function (err, file) {
+                if (err) {
+                    callBack(err, null);
+                }
+                else {
+                    var filePath = file.PhysicalPath;
+                    fs.unlink(filePath, function (err) {
+                        callBack(err, null);
+                    });
+                }
+            })
+        }
+    };
+
+    this.DownloadFile = function (FileID, callBack) {
+        var FileModel = mongoose.model('File');
+        FileModel.findById(FileID, function (err, file) {
+            if (err) {
+                callBack(err);
+                return;
+            }
+            else if (file == null){
+                callBack(null, null);
+            }
+            else {
+                fs.readFile(file.PhysicalPath, function (err, data) {
+                    file.dataStream = data;
+                    callBack(null, file);
+                });
+            }
+
+
+        });
+    };
+
 
     var GenerateFileName = function (File, folderPath, fileExtension, callBack) {
         var fileName = File.name.substring(0, (File.name.length - fileExtension.length));

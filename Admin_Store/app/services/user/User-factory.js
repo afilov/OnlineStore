@@ -1,37 +1,12 @@
 app.factory('UserFactory', ['$rootScope', '$http', '$timeout', '$q', function ($rootScope, $http, $timeout, $q) {
     return {
-        getAllProducts: function () {
-            return $http({
-                method: 'GET',
-                url: $rootScope.serverUrl + '/products',
-                withCredentials: true,
-                data: data
-            })
-        },
-        createProduct: function () {
+        Authenticate: function (data) {
             return $http({
                 method: 'POST',
-                url: $rootScope.serverUrl + '/create',
-                withCredentials: true,
+                url: $rootScope.serverUrl + '/admin/user/authenticate',
+                withCredentials: false,
                 data: data
             })
-        },
-        getProductByID: function (id) {
-            //return $http({
-            //    method: 'GET',
-            //    url: $rootScope.serverUrl + '/product/:id',
-            //    withCredentials: true,
-            //    data: data
-            //})
-            var deferred = $q.defer();
-            var promise = deferred.promise;
-            $timeout(function () {
-                deferred.resolve({
-                    Name: "Test",
-                    Price: 150
-                });
-            }, 1000);
-            return promise;
         }
     }
 

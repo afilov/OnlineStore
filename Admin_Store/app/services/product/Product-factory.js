@@ -37,7 +37,13 @@ app.factory('ProductFactory', ['$rootScope', '$http', '$timeout', '$q', function
                 url: $rootScope.serverUrl + '/get/product/'+ id,
                 withCredentials: true
             })
-
+        },
+        getImageByID: function (id) {
+            return $http({
+                method: 'GET',
+                url: $rootScope.serverUrl + '/product/attachment/download/'+ id,
+                withCredentials: true
+            })
         }
     }
 

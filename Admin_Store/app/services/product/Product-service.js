@@ -14,6 +14,18 @@ app.service("Product", ['ProductFactory', '$rootScope', '$q', function (ProductF
         }
     };
 
+    Product.prototype.GetImageByID = function (id) {
+        var deferred = $q.defer();
+        var promise = deferred.promise;
+        var factoryPromise = ProductFactory.getImageByID(id);
+        factoryPromise.then(function (data) {
+            deferred.resolve(data);
+        }, function (err) {
+            deferred.reject(err);
+        });
+        return promise;
+    };
+
 
     Product.prototype.GetAllProducts = function () {
         var deferred = $q.defer();

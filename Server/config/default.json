@@ -1,4 +1,5 @@
 {
+
   "serverport": 3003,
   "tokenSecret":"FinkiOStoreShhh",
   "mongoDB": "mongodb://localhost:27017/FinkiOStore",
