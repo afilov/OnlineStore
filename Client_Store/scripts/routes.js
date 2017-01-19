@@ -52,15 +52,24 @@ app.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
                     }
                 }
             })
-            //.state('Shopping_Cart', {
-            //    url: '/shopcart',
-            //    views: {
-            //        '@': {
-            //            templateUrl: '../Templates/shopping_cart.html',
-            //            controller: 'ShopCartCtrl'
-            //        }
-            //    }
-            //})
+            .state('Shopping_Cart', {
+                url: '/shopcart',
+                views: {
+                    '@': {
+                        templateUrl: '../views/shopping_cart.html',
+                        controller: 'ShopCartCtrl'
+                    }
+                }
+            })
+            .state('About_Us', {
+                url: '/information',
+                views: {
+                    '@': {
+                        templateUrl: '../views/about_us.html',
+                        controller: 'MainCtrl'
+                    }
+                }
+            });
         $httpProvider.interceptors.push(['$q', '$location', '$localStorage', function ($q, $location, $localStorage) {
             return {
                 'request': function (config) {
