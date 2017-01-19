@@ -7,7 +7,15 @@ app.factory('UserFactory', ['$rootScope', '$http', '$timeout', '$q', function ($
                 withCredentials: false,
                 data: data
             })
-        }
+        },
+        Update : function (data) {
+            return $http({
+                method: 'POST',
+                url: $rootScope.serverUrl + '/admin/user/update',
+                withCredentials: true,
+                data: data
+            })
+        },
     }
 
 

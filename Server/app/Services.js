@@ -109,5 +109,8 @@ module.exports = function Services() {
     Restify.AddPostService('/admin/user/authenticate', false, Modules.AdminUser.Authenticate);
 
 
+    Restify.AddPostService('/admin/user/update', false, Modules.AdminUser.Update);
+
+
 
 };

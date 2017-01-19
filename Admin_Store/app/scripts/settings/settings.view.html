@@ -16,13 +16,9 @@
                     </md-input-container><br>
                     <md-input-container class="md-block">
                         <label>Password</label>
-                        <input type="text" ng-model="rootUser.Password"/><br><br>
-                        <md-button class="md-raised md-primary pull-right" ng-click="changePassword()">Change password</md-button>
+                        <input type="password" ng-model="rootUser.TempPassword"/><br><br>
+                        <md-button class="md-raised md-primary pull-right" ng-click="updateUser()">Save</md-button>
                     </md-input-container><br>
-                    <md-input-container class="md-block">
-                        <label>Created On</label>
-                        <input type="date" ng-disabled="true" ng-model="rootUser.CreatedOn"/>
-                    </md-input-container>
                 </form>
             </md-card-content>
         </md-card>

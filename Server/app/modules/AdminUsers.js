@@ -64,8 +64,28 @@ Method.Authenticate = function (req,res,next) {
 };
 
 
-Method.Update = function () {
-
+Method.Update = function (req,res,next) {
+    if (!req.body) {
+        Restify.RespondError(res, 401, "No data recieved");
+        next();
+    }
+    else {
+        var tmpUser = req.body;
+        if (tmpUser.TempPassword != null){
+            tmpUser.Password = md5(tmpUser.TempPassword);
+        }
+        var AdminUser = new RefModules.AdminUser(tmpUser);
+        AdminUserModel.findOneAndUpdate({_id: AdminUser._id}, {$set: AdminUser}, function (err, admin) {
+            if (err) {
+                Restify.RespondError(res, 401, "DB Error");
+            }
+            else {
+                admin._doc.Token = Restify.CreateToken(admin._doc);
+                Restify.RespondSuccess(res, admin);
+            }
+            next();
+        });
+    }
 };
 
 module.exports = AdminUser;
