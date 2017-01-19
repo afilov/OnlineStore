@@ -14,7 +14,15 @@ module.exports = function Services() {
                 Restify.RespondError("DB Error");
             }
             else {
-                Restify.RespondSuccess(res, products);
+                var productList = products;
+                if (products == null){
+                    productList = [];
+                }
+                else if (products.constructor !== Array){
+                    productList = [];
+                    productList[0] = products;
+                }
+                Restify.RespondSuccess(res, productList);
             }
         })
     });

@@ -14,7 +14,7 @@ var UserSchema = new Schema({
     City: String,
     ZipCode: String,
     Street: String,
-    FacebookID: Number,
+    FacebookID: String,
     DateCreated: Date
 });
 
@@ -34,6 +34,7 @@ function User(data) {
     this.ZipCode = null;
     this.Street = null;
     this.DateCreated = new Date();
+    this.FacebookID = null;
     if (data) {
         extend(this, data);
     }
@@ -69,20 +70,44 @@ Method.FBAuthenticate = function (req, res, next) {
     if (updateInfo.accessToken == undefined) {
         Restify.RespondError(res, 409, "Facebook login failed");
     } else {
-        FB.api('me', {fields: ['id'], access_token: updateInfo.accessToken}, function (result) {
+        FB.api('me', {fields: ['id','email','first_name','last_name'], access_token: updateInfo.accessToken}, function (result) {
             if (result.error) {
                 Restify.RespondError(res, 409, "Facebook login failed");
             }
             else {
-                UserModel.findOne({FacebookID: result.id}, function (err, user) {
-                    if (err) {
-                        Restify.RespondError(res, 409, 'DB Error.');
+                UserModel.findOne({$and:[{Email:result.email},{FacebookID:{$ne:result.id}}]},function (err,user) {
+                    if (err){
+                        Restify.RespondError(res, 401, "DB Error");
                     }
-                    else if (user == null) {
-
+                    else if (user != null){
+                        Restify.RespondError(res, 401, "There is already user with this email, please login and associate with your fb account");
                     }
-
+                    else {
+                        UserModel.findOne({FacebookID: result.id}, function (err, user) {
+                            if (err) {
+                                Restify.RespondError(res, 401, 'DB Error.');
+                            }
+                            else if (user == null) {
+                                var tmpUser = new RefModules.User({FirstName:result.first_name,LastName:result.last_name,Email:result.email,FacebookID:result.id});
+                                UserModel.create(tmpUser, function (err, user) {
+                                    if (err) {
+                                        Restify.RespondError(res, 401, "DB Error");
+                                    }
+                                    else {
+                                        global.OStore.Modules.Mailer.SendWelcomeEmail(user);
+                                        user._doc.Token = Restify.CreateToken(user._doc);
+                                        Restify.RespondSuccess(res, user);
+                                    }
+                                })
+                            }
+                            else {
+                                user._doc.Token = Restify.CreateToken(user._doc);
+                                Restify.RespondSuccess(res, user);
+                            }
+                        });
+                    }
                 });
+
 
             }
         });
