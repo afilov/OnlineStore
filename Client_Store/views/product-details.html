@@ -3,21 +3,26 @@
             <div class="row">
                 <md-button  class="pull-right md-raised md-warn" ng-click="Back()" aria-label="test">Back</md-button>
             </div>
+            <p class="h2" style="color: dodgerblue;">{{currentProduct.Name}}</p>
             <div class="wrapper row">
-                <div class="preview col-md-4">
+
+
+                <div class="preview col-md-5">
 
                     <div class="tab-content">
+
                         <div class="tab-pane active" id="pic-1"><img width="320" height="250" ng-src="{{currentProduct.ImageURL}}" /></div>
                     </div>
 
                 </div>
                 <div class="col-md-6">
-                    <p class="h3">{{currentProduct.Name}}</p>
-                    <p class="product-description">{{currentProduct.Description}}</p>
-                    <p class="h4">Current price: <span>{{currentProduct.Price}} $</span></p>
-                    <p class="h4">Enter quantity <input type="number" ng-model="quantityBought"/></p>
-                    <div class="action">
-                        <md-button></md-button>
+                    <p class="product-description">{{currentProduct.Description}}</p><br>
+                    <p class="h4">Current price: <span class="label label-default">{{currentProduct.Price}} $</span></p><br>
+                    <p class="h4">Enter quantity </p>
+                    <input type="number" class="col-md-2" ng-model="quantityBought"/><br><br>
+                    <div>
+                        <button class="btn btn-success">Buy now</button>
+
                     </div>
                 </div>
             </div>
