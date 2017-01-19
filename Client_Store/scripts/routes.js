@@ -28,16 +28,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
                 views: {
                     '@': {
                         templateUrl: '../views/products.html',
-                        controller: 'ProductCtrl'
-                    }
-                }
-            })
-            .state('Categories', {
-                url: '/categories',
-                views: {
-                    '@': {
-                        templateUrl: '../views/categories.html',
-                        controller: 'CategoriesCtrl'
+                        controller: 'ProductManagementCtrl'
                     }
                 }
             })

@@ -1,30 +1,36 @@
-<div class="row">
-    <md-list layout="column" class="pull-right">
-        <md-list-item>
-            <md-button class="pull-right md-raised md-warn" ng-click="browseBy()">Browse by category...</md-button>
-        </md-list-item>
-    </md-list>
-</div>
-<md-list-item class="col-md-3 col-xs-3 col-xs-offset-1 col-md-offset-1 well well-sm" ng-repeat="product in Products">
-    <div>
-        <div class="thumbnail">
-            <img ng-src={{product.ImageURL}}>
+<div layout="row">
+    <md-nav-bar md-selected-nav-item="selectedCategory" nav-bar-aria-label="navigation links">
+        <md-nav-item md-nav-click="getAllProducts()">All products</md-nav-item>
+        <md-nav-item md-nav-click="renderProductsByCategory(category)" ng-repeat="category in Categories"
+                     ng-value="category._id">
+            {{category.Name}}
+        </md-nav-item>
+    </md-nav-bar>
+</div><br>
+<div layout="row">
+    <md-list-item class="col-md-3 col-xs-3 col-xs-offset-1 col-md-offset-1 well well-sm"
+                  ng-repeat="product in Products">
+        <div>
+            <div class="thumbnail">
+                <img ng-src={{product.ImageURL}}>
+            </div>
+            <h4>{{product.Name}}</h4>
+
+            <p class="details">
+                {{product.Description.slice(0,40)}}...
+            </p>
+            <h4 class="pull-right">Price: <span class="label label-success">{{product.Price}} $ </span></h4><br><br>
+            <section class="text-right">
+                <span flex="20"></span>
+                <md-button class="md-raised md-primary">
+                    <span class="glyphicon glyphicon-plus" ng-click="addToCart(product)"></span> cart
+                </md-button>
+                <md-button class="md-raised md-warn">
+                    <span class="glyphicon glyphicon-plus" ng-click="addToWishlist(product)"></span> wishlist
+                </md-button>
+            </section>
         </div>
-        <h4>{{product.Name}}</h4>
+    </md-list-item>
+    <p class="h3" ng-if="Products.length==0">There are no products in this category yet.</p>
 
-        <p class="details">
-            {{product.Description.slice(0,40)}}...
-        </p>
-        <h4 class="pull-right">Price: <span class="label label-success">{{product.Price}} $ </span></h4><br><br>
-        <section class="text-right">
-            <span flex="20"></span>
-            <md-button class="md-raised md-primary">
-                <span class="glyphicon glyphicon-plus" ng-click="addToCart(product)"></span> cart
-            </md-button>
-            <md-button class="md-raised md-warn">
-                <span class="glyphicon glyphicon-plus" ng-click="addToWishlist(product)"></span> wishlist
-            </md-button>
-        </section>
-    </div>
-</md-list-item>
-
+</div>

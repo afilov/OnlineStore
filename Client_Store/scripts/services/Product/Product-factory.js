@@ -45,13 +45,14 @@ app.factory('ProductFactory', ['$rootScope', '$http', '$timeout', '$q', function
                 withCredentials: true
             })
         },
-        getProductByCategoryID: function(id){
+        getProductsByCategoryID: function(id){
             return $http({
                 method: 'GET',
-                url: $rootScope.serverUrl + '/get/attachment/download/'+ id,
+                url: $rootScope.serverUrl + '/get/category/products/'+ id,
                 withCredentials: true
             })
         }
+
     }
 
 

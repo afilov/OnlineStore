@@ -1,35 +1,41 @@
 "use strict";
 
-app.controller("CategoriesCtrl", ['$scope', '$rootScope', '$localStorage', '$state', '$mdSidenav','Category',
-    function ($scope, $rootScope, $localStorage, $state, $mdSidenav, Category) {
+app.controller("ProductManagementCtrl", ['$scope', '$rootScope', '$localStorage', '$state', '$mdSidenav', 'Category', 'CategoryFactory', 'Product',
+    function ($scope, $rootScope, $localStorage, $state, $mdSidenav, Category, CategoryFactory, Product) {
 
         var CategoryInstance = new Category();
-        $scope.Categories = {};
+
+        var ProductInstance = new Product();
+        $scope.Products = [];
+        $scope.Categories = [];
         $scope.selectedCategory;
 
+        $scope.browseBy = function () {
+            $state.go('Categories');
+        };
 
+        $scope.addToCart = function (product) {
+
+        };
+        $scope.addToWishlist = function (product) {
+
+        };
+
+        $scope.getAllProducts = function () {
+            var promise = ProductInstance.GetAllProducts();
+            promise.then(function (data) {
+                $scope.Products = data.data;
+            }, function (err) {
+                console.log(err)
+            });
+        };
+        $scope.getAllProducts();
 
         $scope.loginUser = function () {
 
         };
-        $scope.models = {
-            selected: null,
-            lists: {"A": [], "B": []}
-        };
 
-        // Generate initial model
-        for (var i = 1; i <= 3; ++i) {
-            $scope.models.lists.A.push({label: "Item A" + i});
-            $scope.models.lists.B.push({label: "Item B" + i});
-        }
-
-        // Model to JSON for demo purpose
-        $scope.$watch('models', function(model) {
-            $scope.modelAsJson = angular.toJson(model, true);
-        }, true);
-
-
-        $scope.getAll = function () {
+        $scope.getAllCategories = function () {
             var promise = CategoryInstance.GetAllCategories();
             promise.then(function (data) {
                 $scope.Categories = data.data;
@@ -38,10 +44,15 @@ app.controller("CategoriesCtrl", ['$scope', '$rootScope', '$localStorage', '$sta
                 console.log(err)
             });
         };
-        $scope.getAll();
+        $scope.getAllCategories();
 
-        $scope.renderProducts = function(category){
-            var promise = Cat
+        $scope.renderProductsByCategory = function (category) {
+            var promise = ProductInstance.GetProductByCategoryID(category._id);
+            promise.then(function (data) {
+                $scope.Products = data;
+            }, function (err) {
+                console.log(err)
+            });
         }
 
     }]);

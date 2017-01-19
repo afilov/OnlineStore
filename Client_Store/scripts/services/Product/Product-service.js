@@ -56,6 +56,22 @@ app.service("Product", ['ProductFactory', '$rootScope', '$q', function (ProductF
         });
         return promise;
     };
+    Product.prototype.GetProductByCategoryID = function (id) {
+        var deferred = $q.defer();
+        var promise = deferred.promise;
+        var factoryPromise = ProductFactory.getProductsByCategoryID(id);
+        factoryPromise.then(function (allProducts) {
+            var products = [];
+            for (var i = 0; i < allProducts.data.length; i++) {
+                var product = allProducts.data[i];
+                products.push(new Product(product));
+            }
+            deferred.resolve(products);
+        }, function (err) {
+            deferred.reject(err);
+        });
+        return promise;
+    };
 
     Product.prototype.CreateProduct = function () {
         var deferred = $q.defer();
@@ -88,7 +104,7 @@ app.service("Product", ['ProductFactory', '$rootScope', '$q', function (ProductF
         var promise = deferred.promise;
         var factoryPromise = ProductFactory.deleteProduct(this._id);
         factoryPromise.then(function (data) {
-            $rootScope.showActionToast(data.data.Name +' has been deleted!');
+            $rootScope.showActionToast(data.data.Name + ' has been deleted!');
             deferred.resolve(data.data);
         }, function (err) {
             deferred.reject(err);
