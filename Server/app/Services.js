@@ -95,13 +95,27 @@ module.exports = function Services() {
 
     //users
 
-    Restify.AddPostService('/user/authenticate', false, Modules.User.Create);
+    Restify.AddPostService('/user/authenticate', false, Modules.User.Authenticate);
+
+    //Todo: Check income values;
+    Restify.AddPostService('/user/fb/authenticate', false, Modules.User.FBAuthenticate);
+
+    Restify.AddPutService('/user/update', true, Modules.User.Update);
 
     Restify.AddPostService('/user/register', false, Modules.User.Create);
-    //
-    // Restify.AddPostService('/user/register', false, function (req, res, next) {
-    //     // Modules.Mailer.SendWelcomeEmail("angelfilov@gmail.com");
-    // });
+
+
+    //shopping cart
+
+    //Todo: create class shopping cart
+
+    Restify.AddGetService('/user/cartproducts', true, Modules.AdminUser.Authenticate);
+
+    Restify.AddGetService('/user/cartproduct/:id', true, Modules.AdminUser.Authenticate);
+
+    Restify.AddPostService('/user/cartproduct', true, Modules.AdminUser.Authenticate);
+
+    Restify.AddPutService('/user/cartproduct', true, Modules.AdminUser.Authenticate);
 
 
     //admin users
@@ -109,8 +123,7 @@ module.exports = function Services() {
     Restify.AddPostService('/admin/user/authenticate', false, Modules.AdminUser.Authenticate);
 
 
-    Restify.AddPostService('/admin/user/update', false, Modules.AdminUser.Update);
-
+    Restify.AddPutService('/admin/user/update', false, Modules.AdminUser.Update);
 
 
 };

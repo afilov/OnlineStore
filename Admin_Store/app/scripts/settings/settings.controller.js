@@ -7,7 +7,7 @@ app.controller('SettingsCtrl', ['$rootScope', '$scope', 'User', '$localStorage',
         if ($scope.rootUser.TempPassword != null) {
             Password = $scope.rootUser.Password;
         }
-        var promise = $scope.rootUser.Update(Password);
+        var promise = $scope.rootUser.Update();
         promise.then(function (data) {
             $localStorage.Data = data.data;
             $rootScope.User = data.data;

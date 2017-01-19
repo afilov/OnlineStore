@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "config": "^1.24.0",
+    "fb": "^1.1.1",
     "fs": "0.0.1-security",
     "jsonfile": "^2.4.0",
     "jsonwebtoken": "^7.2.1",
