@@ -19,7 +19,7 @@ AdminUserModel.find(function (err,adminUsers) {
         console.error("DB Error");
     }
     else if (adminUsers.length == 0){
-        var superAdmin = new UserModel();
+        var superAdmin = new AdminUserModel();
         superAdmin.Username = "superadmin";
         superAdmin.Password = md5("superadmin");
         superAdmin.save(function (err) {

@@ -9,7 +9,6 @@ app.service("User", ['UserFactory', '$rootScope', '$q', function (UserFactory, $
         }
     };
 
-
     User.prototype.Authenticate = function () {
         var deferred = $q.defer();
         var promise = deferred.promise;

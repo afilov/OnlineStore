@@ -16,6 +16,13 @@ app.factory('UserFactory', ['$rootScope', '$http', '$timeout', '$q', function ($
                 data: data
             })
         },
+        GetAll: function(){
+            return $http({
+                method: 'GET',
+                url: $rootScope.serverUrl + '/users/all',
+                withCredentials: true
+            })
+        }
     }
 
 

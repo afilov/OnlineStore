@@ -1,13 +1,23 @@
 "use strict";
 
-app.controller("MainCtrl", ['$scope', '$rootScope', '$localStorage', '$state', '$mdSidenav',
-    function ($scope, $rootScope, $localStorage, $state, $mdSidenav) {
+app.controller("MainCtrl", ['$scope', '$rootScope', '$localStorage', '$state', '$mdSidenav','UserFactory',
+    function ($scope, $rootScope, $localStorage, $state, $mdSidenav, UserFactory) {
         $rootScope.PageTitle = "Online Store Admin";
+        $scope.Users = [];
 
         $rootScope.Logout = function () {
             $localStorage.Data = null;
             $rootScope.User = null;
         };
+
+        $scope.getAllUsers = function(){
+            var promise = UserFactory.GetAll();
+            promise.then(function(data){
+                $scope.Users = data.data;
+            })
+        };
+        $scope.getAllUsers();
+
 
         function BuildMainMenu() {
             if ($rootScope.mainMenu)
