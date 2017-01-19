@@ -17,22 +17,60 @@
     <md-input-container class="md-block">
         <!-- Use floating placeholder instead of label -->
         <md-icon md-svg-src="../imgs/ic_email_black_24px.svg" class="email"></md-icon>
-        <input ng-model="User.Email" type="email" placeholder="Email (required)" ng-required="true">
+        <input ng-model="User.Email" type="email" placeholder="Email" ng-required="true">
     </md-input-container>
     <md-input-container class="md-block">
         <!-- Use floating placeholder instead of label -->
-        <md-icon md-svg-src="../imgs/ic_lock_black_24px.svg" class="email"></md-icon>
-        <input ng-model="User.Password" type="password" placeholder="Password (required)" ng-required="true">
+        <md-icon md-svg-src="../imgs/ic_lock_black_24px.svg" class="password"></md-icon>
+        <input ng-model="User.Password" type="password" placeholder="Password" ng-required="true">
     </md-input-container>
     <md-input-container class="md-block">
         <!-- Use floating placeholder instead of label -->
-        <md-icon md-svg-src="../imgs/ic_email_black_24px.svg" class="email"></md-icon>
-        <input ng-model="confirmed" type="password" placeholder="Confirm Password (required)" ng-required="true">
+        <md-icon md-svg-src="../imgs/ic_email_black_24px.svg" class="confirmpassword"></md-icon>
+        <input ng-model="confirmed" type="password" placeholder="Confirm Password" ng-required="true">
     </md-input-container>
+
+    <div layout="row">
+        <md-input-container class="md-block">
+            <!-- Use floating placeholder instead of label -->
+            <md-icon md-svg-src="../imgs/ic_contact_phone_black_24px.svg" class="country"></md-icon>
+            <!--<input ng-model="User.Country" type="text" placeholder="Contry" ng-required="false">-->
+            <md-select aria-label="Category" ng-model="User.Country" >
+                <md-option ng-repeat="(key,value) in Countries" ng-value="key" >
+                    {{value}}
+                </md-option>
+                <!--<md-option value="axe">Axe</md-option>-->
+                <!--<md-option value="sword">Sword</md-option>-->
+                <!--<md-option value="wand">Wand</md-option>-->
+                <!--<md-option value="pen">Pen</md-option>-->
+            </md-select>
+        </md-input-container>
+        <span flex="5"></span>
+        <md-input-container class="md-block">
+            <!-- Use floating placeholder instead of label -->
+            <!--<md-icon md-svg-src="../imgs/ic_email_black_24px.svg" class="city"></md-icon>-->
+            <input ng-model="User.City" type="text" placeholder="City" ng-required="false">
+        </md-input-container>
+        <span flex="5"></span>
+
+        <md-input-container class="md-block">
+            <!-- Use floating placeholder instead of label -->
+            <!--<md-icon md-svg-src="../imgs/ic_email_black_24px.svg" class="street"></md-icon>-->
+            <input ng-model="User.Street" type="text" placeholder="Street" ng-required="false">
+        </md-input-container>
+        <span flex="5"></span>
+
+        <md-input-container class="md-block">
+            <!-- Use floating placeholder instead of label -->
+            <!--<md-icon md-svg-src="../imgs/ic_email_black_24px.svg" class="street"></md-icon>-->
+            <input ng-model="User.ZipCode" type="text" placeholder="Zip Code" ng-required="false">
+        </md-input-container>
+    </div>
 </form>
-<p ng-if="!(confirmed==User.Password)">Passwords does not match!</p>
-<p class="error" ng-if="ErrorMsg.length > 0">{{ErrorMsg}}</p>
-<md-button class="md-raised md-primary pull-right" ng-disabled="!registerForm.$valid && " ng-click="registerUser()">
+<div class="alert" ng-class="ErrClass">
+    <span class="closebtn" ng-click="toggleErrorMsg()">&times;</span>
+    <p>{{ErrorMsg}}</p>
+</div>
+<md-button class="md-raised md-primary pull-right" ng-disabled="!registerForm.$valid" ng-click="registerUser()">
     Register
 </md-button>
-

@@ -8,7 +8,7 @@ module.exports = function Services() {
 
     Restify.AddGetService('/get/products', false, Modules.Product.GetAll);
 
-    Restify.AddGetService('/get/category/producs/:_id', false, function (req, res, next) {
+    Restify.AddGetService('/get/category/products/:_id', false, function (req, res, next) {
         Modules.Product.GetByFilter({CategoryId: req.params._id}, function (err, products) {
             if (err) {
                 Restify.RespondError("DB Error");
@@ -102,7 +102,7 @@ module.exports = function Services() {
 
     Restify.AddPutService('/user/update', true, Modules.User.Update);
 
-    Restify.AddPostService('/user/register', false, Modules.User.Create);
+    Restify.AddPostService('/user/register', false, Modules.User.Register);
 
 
     //shopping cart
@@ -121,7 +121,6 @@ module.exports = function Services() {
     //admin users
 
     Restify.AddPostService('/admin/user/authenticate', false, Modules.AdminUser.Authenticate);
-
 
     Restify.AddPutService('/admin/user/update', false, Modules.AdminUser.Update);
 

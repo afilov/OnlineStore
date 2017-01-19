@@ -1,3 +1,5 @@
+<a class="btn btn-block btn-lg btn-fb m0" ng-click="FBLogin()"><span><small>Register / Login via</small>&nbsp;Facebook</span></a>
+<h3 class="text-center">Or</h3
 <form name="loginForm">
     <md-input-container class="md-block">
         <!-- Use floating placeholder instead of label -->
@@ -10,7 +12,12 @@
         <input ng-model="User.Password" type="password" placeholder="Password (required)" ng-required="true">
     </md-input-container>
 </form>
-<p ng-if="ErrorMsg.length > 0">{{ErrorMsg}}</p>
-
-<md-button class="md-raised md-primary pull-right" ng-disabled="!loginForm.$valid" ng-click="loginUser()">Login
+<div class="alert" ng-class="ErrClass">
+    <span class="closebtn" ng-click="toggleErrorMsg()">&times;</span>
+    <p>{{ErrorMsg}}</p>
+</div>
+<md-button class="btn btn-block btn-lg md-raised md-primary pull-right" ng-disabled="!loginForm.$valid" ng-click="loginUser()">Login
 </md-button>
+<br/>
+<br/>
+<md-button class="btn btn-block btn-lg md-raised md-primary pull-right" ui-sref="Register">Register</md-button>
