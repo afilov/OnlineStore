@@ -112,6 +112,10 @@ module.exports = function Services() {
 
     Restify.AddPostService('/user/register', false, Modules.User.Register);
 
+    Restify.AddGetService('/users/all',true,Modules.User.GetAll);
+
+    Restify.AddGetService('/user/:id',true,Modules.User.GetByID);
+
 
     //shopping cart
 

@@ -195,7 +195,7 @@ Method.Update = function (req, res, next) {
     }
 };
 
-Method.FindByID = function (req, res, next) {
+Method.GetByID = function (req, res, next) {
     UserModel.findById(req.params.id, function (err, user) {
         if (err) {
             Restify.RespondError(res, 404, "User does not exist");
@@ -204,6 +204,17 @@ Method.FindByID = function (req, res, next) {
             Restify.RespondSuccess(res, user);
         }
     })
+};
+
+Method.GetAll = function (req,res,next) {
+    UserModel.find(function (err, users) {
+        if (err) {
+            Restify.RespondError(res, 404, "User does not exist");
+        }
+        else {
+            Restify.RespondSuccess(res, users);
+        }
+    }).sort({DateCreated:1})
 };
 
 module.exports = User;
