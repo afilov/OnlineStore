@@ -10,7 +10,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
                 views: {
                     '@': {
                         templateUrl: '../views/home.html',
-                        controller: 'ProductCtrl'
+                        controller: 'MainCtrl'
                     }
                 }
             })
