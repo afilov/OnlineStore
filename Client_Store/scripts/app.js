@@ -36,8 +36,8 @@ app.run(['$rootScope', '$localStorage', '$q', '$location', '$mdToast', '$state',
         };
 
         $rootScope.Logout = function () {
-            $localStorage.UserData = {};
-            $rootScope.User = {};
+            $localStorage.UserData = null;
+            $rootScope.User = null;
             $state.go("Login");
         }
 
