@@ -52,10 +52,10 @@ app.service("User", ['UserFactory', '$rootScope', '$q', function (UserFactory, $
         return promise;
     };
 
-    User.prototype.Register = function () {
+    User.prototype.Register = function (FBresult) {
         var deferred = $q.defer();
         var promise = deferred.promise;
-        var factoryPromise = UserFactory.Register(this);
+        var factoryPromise = UserFactory.Register(FBresult);
         factoryPromise.then(function (data) {
             var error = false;
             if (data.status == 200) {
