@@ -34,6 +34,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
             })
             .state('Product_Details', {
                 url: '/product/:id',
+                parent: 'Products',
                 views: {
                     '@': {
                         templateUrl: '../views/product-details.html',

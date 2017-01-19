@@ -1,6 +1,6 @@
-<div layout="row">
-    <md-nav-bar md-selected-nav-item="selectedCategory" nav-bar-aria-label="navigation links">
-        <md-nav-item md-nav-click="getAllProducts()">All products</md-nav-item>
+<div layout="row" class="scrollmenu">
+    <md-nav-bar md-selected-nav-item="allproducts" nav-bar-aria-label="navigation links">
+        <md-nav-item md-nav-click="getAllProducts()" name="allproducts">All products</md-nav-item>
         <md-nav-item md-nav-click="renderProductsByCategory(category)" ng-repeat="category in Categories"
                      ng-value="category._id">
             {{category.Name}}

@@ -1,5 +1,8 @@
 <div class="container">
         <div class="container-fliud">
+            <div class="row">
+                <md-button  class="pull-right md-raised md-warn" ng-click="Back()" aria-label="test">Back</md-button>
+            </div>
             <div class="wrapper row">
                 <div class="preview col-md-4">
 
@@ -12,8 +15,9 @@
                     <p class="h3">{{currentProduct.Name}}</p>
                     <p class="product-description">{{currentProduct.Description}}</p>
                     <p class="h4">Current price: <span>{{currentProduct.Price}} $</span></p>
+                    <p class="h4">Enter quantity <input type="number" ng-model="quantityBought"/></p>
                     <div class="action">
-                        <md-button
+                        <md-button></md-button>
                     </div>
                 </div>
             </div>

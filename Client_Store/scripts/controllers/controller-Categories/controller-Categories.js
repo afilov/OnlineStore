@@ -13,10 +13,6 @@ app.controller("ProductManagementCtrl", ['$scope', '$rootScope', '$localStorage'
             $state.go('Product_Details', {id: product._id});
         };
 
-        $scope.browseBy = function () {
-            $state.go('Categories');
-        };
-
         $scope.addToCart = function (product) {
 
         };
@@ -33,10 +29,6 @@ app.controller("ProductManagementCtrl", ['$scope', '$rootScope', '$localStorage'
             });
         };
         $scope.getAllProducts();
-
-        $scope.loginUser = function () {
-
-        };
 
         $scope.getAllCategories = function () {
             var promise = CategoryInstance.GetAllCategories();

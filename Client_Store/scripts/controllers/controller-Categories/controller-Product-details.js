@@ -12,4 +12,8 @@ app.controller("ProductDetailsCtrl", ['$scope', '$rootScope', '$localStorage', '
             $scope.currentProduct = data;
         });
 
+        $scope.Back = function () {
+            $state.go($state.current.parent);
+        }
+
     }]);
