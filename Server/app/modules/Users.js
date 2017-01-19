@@ -1,6 +1,7 @@
 "use strict";
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+var md5 = require('md5');
 var extend = require('util')._extend;
 
 var UserSchema = new Schema({
@@ -12,6 +13,7 @@ var UserSchema = new Schema({
     City: String,
     ZipCode: String,
     Street: String,
+    FacebookID: Number,
     DateCreated: Date
 });
 
@@ -41,16 +43,17 @@ Method.Authenticate = function () {
 
 };
 
-Method.Create = function (req,res,next) {
+Method.Create = function (req, res, next) {
     var tmpUser = new RefModules.User();
-    UserModel.findOne({Email:tmpUser.Email}, function (err, user) {
-        if (err){
-            Restify.RespondError(res,500,"DB Error");
+    UserModel.findOne({Email: tmpUser.Email}, function (err, user) {
+        if (err) {
+            Restify.RespondError(res, 500, "DB Error");
         }
-        else if (user != null){
-            Restify.RespondError(res,401,"Email already exists");
+        else if (user != null) {
+            Restify.RespondError(res, 401, "Email already exists");
         }
         else {
+            tmpUser.Password = md5(tmpUser.Password);
             UserModel.create(tmpUser, function (err, user) {
                 if (err) {
 
