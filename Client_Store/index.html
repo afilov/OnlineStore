@@ -31,8 +31,8 @@
 
     <!--FACTORIES/SERVICES/DIRECTIVES-->
     <script src="scripts/directives/navigation-menu.js"></script>
-    <script src="scripts/directives/category-menu.js"></script>
-    <script src="scripts/directives/products.js"></script>
+    <!--<script src="scripts/directives/category-menu.js"></script>-->
+    <!--<script src="scripts/directives/products.js"></script>-->
     <script src="scripts/services/User/User-factory.js"></script>
     <script src="scripts/services/User/User-service.js"></script>
 
@@ -40,6 +40,7 @@
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="bower_components/angular-material/angular-material.css">
     <link rel="stylesheet" href="css/ionicons.min.css">
+    <link rel="stylesheet" href="css/main.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="bower_components/angular-carousel/dist/angular-carousel.min.css" rel="stylesheet"/>
 
@@ -56,27 +57,32 @@
     </div>
 </div>
 <div class="container">
-    <category-menu class="pull-right"></category-menu>
-    <!--<ul rn-carousel rn-carousel-index="3" rn-carousel-auto-slide="3">-->
-        <!--<li></li>-->
+    <!-- Todo: move button to products page-->
+    <!--<category-menu class="pull-right"></category-menu>-->
+    <div class="row">
+
+        <!--<ul rn-carousel class="image">-->
+            <!--<li ng-repeat="image in images">-->
+                <!--<div class="layer">{{ image }}</div>-->
+            <!--</li>-->
+        <!--</ul>-->
+        <!--<ul rn-carousel rn-carousel-index="3" rn-carousel-auto-slide="3" style="overflow: visible; !important;">-->
+        <!--&lt;!&ndash;<li></li>&ndash;&gt;-->
         <!--<li ng-repeat="n in [1,2,3,4,5,6] track by $index">-->
-            <!--<div ng-style="{'background-image': 'url(' + 'http://localhost:3040/emt_imgs/Bikes/Bike' + n +'.jpg '+ ')'}"-->
+            <!--<div style="width: 300px; height: 250px;" ng-style="{'background-image': 'url(' + 'http://localhost:3040/emt_imgs/Bikes/Bike' + n +'.jpg '+ ')'}"-->
                  <!--class="bgimage">-->
                 <!--#{{$index}}-->
             <!--</div>-->
         <!--</li>-->
     <!--</ul>-->
-    <!--<ul rn-carousel class="image">-->
-        <!--<li>slide #1</li>-->
-        <!--<li>slide #2</li>-->
-        <!--<li>slide #3</li>-->
-    <!--</ul>-->
-</div>
-
-
-<div class="container">
+    </div>
     <div ui-view=""></div>
 
 </div>
+
+
+<!--<div class="container">-->
+
+<!--</div>-->
 </body>
 </html>

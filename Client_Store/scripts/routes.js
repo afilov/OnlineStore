@@ -9,7 +9,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
                 url: '/home',
                 views: {
                     '@': {
-                        templateUrl: '../Templates/home.html',
+                        templateUrl: '../views/products.html',
                         controller: 'MainCtrl'
                     }
                 }
@@ -23,15 +23,15 @@ app.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
                     }
                 }
             })
-            .state('Categories', {
-                url: '/categories',
-                views: {
-                    '@': {
-                        templateUrl: '../Templates/categories.html',
-                        controller: 'CategoriesCtrl'
-                    }
-                }
-            })
+            //.state('Categories', {
+            //    url: '/categories',
+            //    views: {
+            //        '@': {
+            //            templateUrl: '../Templates/categories.html',
+            //            controller: 'CategoriesCtrl'
+            //        }
+            //    }
+            //})
 
             .state('Login', {
                 url: '/login',
@@ -42,15 +42,15 @@ app.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
                     }
                 }
             })
-            .state('Shopping_Cart', {
-                url: '/shopcart',
-                views: {
-                    '@': {
-                        templateUrl: '../Templates/shopping_cart.html',
-                        controller: 'ShopCartCtrl'
-                    }
-                }
-            })
+            //.state('Shopping_Cart', {
+            //    url: '/shopcart',
+            //    views: {
+            //        '@': {
+            //            templateUrl: '../Templates/shopping_cart.html',
+            //            controller: 'ShopCartCtrl'
+            //        }
+            //    }
+            //})
             
 
 

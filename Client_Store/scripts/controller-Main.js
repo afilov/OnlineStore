@@ -10,4 +10,8 @@ app.controller("MainCtrl", ['$scope', '$rootScope', '$localStorage', '$state', '
             $state.go('Login');
         };
 
+        $scope.images = [
+
+        ]
+
     }]);
