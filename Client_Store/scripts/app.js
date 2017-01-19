@@ -5,10 +5,17 @@ var externalModules = [
     'ngMaterial',
     'ngAria',
     'md.data.table',
-    'angular-carousel'
+    'angular-carousel',
+    'facebook'
 ];
 
 var app = angular.module("clientApp", externalModules);
+
+app.config(['FacebookProvider',
+    function (FacebookProvider) {
+        FacebookProvider.init("388433148171010");
+
+    }]);
 
 
 app.run(['$rootScope', '$localStorage', '$q', '$location', '$mdToast',
@@ -22,10 +29,10 @@ app.run(['$rootScope', '$localStorage', '$q', '$location', '$mdToast',
 
 
         $rootScope.isAuthenticated = function () {
-           if ($localStorage.UserData && $localStorage.UserData && $localStorage.UserData != $rootScope.User) {
-               $rootScope.User = $localStorage.UserData;
-           }
-           return $rootScope.User != null;
+            if ($localStorage.UserData && $localStorage.UserData && $localStorage.UserData != $rootScope.User) {
+                $rootScope.User = $localStorage.UserData;
+            }
+            return $rootScope.User != null;
         };
 
         $rootScope.showActionToast = function (Text) {

@@ -47,12 +47,13 @@ Method.Authenticate = function (req, res, next) {
     }
     else {
         var password = md5(req.body.Password);
-        UserModel.findOne({Username: req.body.Email, Password: password}, function (err, user) {
+        var regex = new RegExp(["^", req.body.Email, "$"].join(""), "i");
+        UserModel.findOne({Email: regex, Password: password}, function (err, user) {
             if (err) {
                 Restify.RespondError(res, 401, "DB Error");
             }
             else if (user == null) {
-                Restify.RespondError(res, 401, "Wrong username or password");
+                Restify.RespondError(res, 401, "Wrong email or password");
             }
             else {
                 user._doc.Token = Restify.CreateToken(user._doc);
@@ -109,7 +110,7 @@ Method.Register = function (req, res, next) {
                         Restify.RespondError(res, 401, "DB Error");
                     }
                     else {
-                        global.OStore.Modules.Mailer.SendWelcomeEmail(user.Email);
+                        global.OStore.Modules.Mailer.SendWelcomeEmail(user);
                         user._doc.Token = Restify.CreateToken(user._doc);
                         Restify.RespondSuccess(res, user);
                     }

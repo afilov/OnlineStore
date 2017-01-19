@@ -23,7 +23,6 @@
     "angular-material-data-table": "^0.10.9",
     "angular-bootstrap": "^2.4.0",
     "angular-carousel": "^1.0.1",
-    "angular-touch": "^1.6.1",
-    "angular-drag-and-drop-lists": "^2.1.0"
+    "angular-touch": "^1.6.1"
   }
 }

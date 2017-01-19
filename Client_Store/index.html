@@ -17,7 +17,6 @@
     <script src="bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
     <script src="bower_components/angular-carousel/dist/angular-carousel.min.js"></script>
     <script src="bower_components/angular-touch/angular-touch.min.js"></script>
-    <script src="bower_components/angular-drag-and-drop-lists/angular-drag-and-drop-lists.min.js"></script>
 
     <!--SCRIPTS-->
     <script src="scripts/app.js"></script>
@@ -36,10 +35,6 @@
     <!--<script src="scripts/directives/products.js"></script>-->
     <script src="scripts/services/User/User-factory.js"></script>
     <script src="scripts/services/User/User-service.js"></script>
-    <script src="scripts/services/Product/Product-factory.js"></script>
-    <script src="scripts/services/Product/Product-service.js"></script>
-    <script src="scripts/services/Category/Category-factory.js"></script>
-    <script src="scripts/services/Category/Category-service.js"></script>
 
     <!--CSS-->
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
@@ -62,14 +57,27 @@
     </div>
 </div>
 <div class="container">
+    <!-- Todo: move button to products page-->
+    <!--<category-menu class="pull-right"></category-menu>-->
     <div class="row">
 
+        <!--<ul rn-carousel class="image">-->
+            <!--<li ng-repeat="image in images">-->
+                <!--<div class="layer">{{ image }}</div>-->
+            <!--</li>-->
+        <!--</ul>-->
+        <!--<ul rn-carousel rn-carousel-index="3" rn-carousel-auto-slide="3" style="overflow: visible; !important;">-->
+        <!--&lt;!&ndash;<li></li>&ndash;&gt;-->
+        <!--<li ng-repeat="n in [1,2,3,4,5,6] track by $index">-->
+            <!--<div style="width: 300px; height: 250px;" ng-style="{'background-image': 'url(' + 'http://localhost:3040/emt_imgs/Bikes/Bike' + n +'.jpg '+ ')'}"-->
+                 <!--class="bgimage">-->
+                <!--#{{$index}}-->
+            <!--</div>-->
+        <!--</li>-->
+    <!--</ul>-->
     </div>
-    <div class="row">
-        <div ui-view="">
+    <div ui-view=""></div>
 
-        </div>
-    </div>
 </div>
 
 
