@@ -4,7 +4,8 @@ var externalModules = [
     'ngStorage',
     'ngMaterial',
     'ngAria',
-    'md.data.table'
+    'md.data.table',
+    'angular-carousel'
 ];
 
 var app = angular.module("clientApp", externalModules);

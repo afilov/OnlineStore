@@ -21,6 +21,8 @@
     "angular-ui-router": "^0.3.2",
     "angular-material": "^1.1.1",
     "angular-material-data-table": "^0.10.9",
-    "angular-bootstrap": "^2.4.0"
+    "angular-bootstrap": "^2.4.0",
+    "angular-carousel": "^1.0.1",
+    "angular-touch": "^1.6.1"
   }
 }
