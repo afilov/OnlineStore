@@ -9,8 +9,8 @@ app.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
                 url: '/home',
                 views: {
                     '@': {
-                        templateUrl: '../views/products.html',
-                        controller: 'MainCtrl'
+                        templateUrl: '../views/home.html',
+                        controller: 'ProductCtrl'
                     }
                 }
             })
@@ -23,15 +23,24 @@ app.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
                     }
                 }
             })
-            //.state('Categories', {
-            //    url: '/categories',
-            //    views: {
-            //        '@': {
-            //            templateUrl: '../Templates/categories.html',
-            //            controller: 'CategoriesCtrl'
-            //        }
-            //    }
-            //})
+            .state('Products', {
+                url: '/products',
+                views: {
+                    '@': {
+                        templateUrl: '../views/products.html',
+                        controller: 'ProductCtrl'
+                    }
+                }
+            })
+            .state('Categories', {
+                url: '/categories',
+                views: {
+                    '@': {
+                        templateUrl: '../views/categories.html',
+                        controller: 'CategoriesCtrl'
+                    }
+                }
+            })
 
             .state('Login', {
                 url: '/login',

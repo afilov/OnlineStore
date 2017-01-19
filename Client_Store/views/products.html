@@ -5,24 +5,24 @@
         </md-list-item>
     </md-list>
 </div>
-<md-list-item class="col-md-3 col-md-offset-1 well well-sm">
+<md-list-item class="col-md-3 col-xs-3 col-xs-offset-1 col-md-offset-1 well well-sm" ng-repeat="product in Products">
     <div>
         <div class="thumbnail">
-            <img src="http://placehold.it/300x200"/>
+            <img ng-src={{product.ImageURL}}>
         </div>
         <h4>{{product.Name}}</h4>
 
         <p class="details">
-            {{product.Description}}
+            {{product.Description.slice(0,40)}}...
         </p>
-        <h4 class="pull-right">{{product.Price}} $</h4><br><br>
-        <section layout="row" class="text-right">
+        <h4 class="pull-right">Price: <span class="label label-success">{{product.Price}} $ </span></h4><br><br>
+        <section class="text-right">
             <span flex="20"></span>
             <md-button class="md-raised md-primary">
-                <span class="glyphicon glyphicon-plus" ng-click="addToCart()"></span> cart
+                <span class="glyphicon glyphicon-plus" ng-click="addToCart(product)"></span> cart
             </md-button>
             <md-button class="md-raised md-warn">
-                <span class="glyphicon glyphicon-plus" ng-click="addToWishlist()"></span> wishlist
+                <span class="glyphicon glyphicon-plus" ng-click="addToWishlist(product)"></span> wishlist
             </md-button>
         </section>
     </div>
