@@ -63,10 +63,6 @@ module.exports = function Restify () {
         }.bind(this);
     };
 
-    this.CreateToken = function (data) {
-        return jwthelper.sign(data,OStore.Config.tokenSecret);
-    };
-
     this.ExtGetServices = {};
     this.ExtPostServices = {};
     this.ExtPutServices = {};
