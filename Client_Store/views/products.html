@@ -19,9 +19,9 @@
             <p class="details">
                 {{product.Description.slice(0,40)}}...
             </p>
-            <h4 class="pull-right">Price: <span class="label label-success">{{product.Price}} $ </span></h4><br><br>
+            <h4 class="pull-left">Price: <span class="label label-success">{{product.Price}} $ </span></h4>
+            <h5  class="pull-right" ng-click="goToDetails(product)">More info <span class="glyphicon glyphicon-info-sign"></span></h5><br><br><br>
             <section class="text-right">
-                <span flex="20"></span>
                 <md-button class="md-raised md-primary">
                     <span class="glyphicon glyphicon-plus" ng-click="addToCart(product)"></span> cart
                 </md-button>

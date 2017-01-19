@@ -4,11 +4,14 @@ app.controller("ProductManagementCtrl", ['$scope', '$rootScope', '$localStorage'
     function ($scope, $rootScope, $localStorage, $state, $mdSidenav, Category, CategoryFactory, Product) {
 
         var CategoryInstance = new Category();
-
         var ProductInstance = new Product();
         $scope.Products = [];
         $scope.Categories = [];
         $scope.selectedCategory;
+
+        $scope.goToDetails = function (product) {
+            $state.go('Product_Details', {id: product._id});
+        };
 
         $scope.browseBy = function () {
             $state.go('Categories');
