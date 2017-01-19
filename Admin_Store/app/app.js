@@ -20,8 +20,6 @@ app.run(['$rootScope', 'ngToast', '$localStorage', '$q', '$location', '$mdToast'
         $rootScope.activeStates = [];
 
         $rootScope.User = null;
-
-        $rootScope.serverPath = window.location.hostname + ":3000";
         $rootScope.serverUrl = "http://192.168.0.104:3003";
 
 
@@ -31,28 +29,6 @@ app.run(['$rootScope', 'ngToast', '$localStorage', '$q', '$location', '$mdToast'
             }
             return $rootScope.User != null;
         };
-
-        //ngToast.showSuccess = function (msg) {
-        //    this.create({
-        //        content: msg,
-        //        className: 'success',
-        //        dismissButton: true,
-        //        animation: 'fade',
-        //        verticalPosition: 'bottom',
-        //        horizontalPosition: 'left'
-        //    });
-        //};
-        //
-        //ngToast.showError = function (msg) {
-        //    this.create({
-        //        content: msg,
-        //        className: 'danger',
-        //        dismissButton: true,
-        //        animation: 'fade',
-        //        verticalPosition: 'bottom',
-        //        horizontalPosition: 'left'
-        //    });
-        //};
 
         $rootScope.showActionToast = function (Text) {
             var toast = $mdToast.simple()
