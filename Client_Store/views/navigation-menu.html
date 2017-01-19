@@ -8,19 +8,20 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" ui-sref=""><span class="glyphicon glyphicon-barcode"></span> OStore</a>
-            <a ui-sref="" class="navbar-brand"><span class="glyphicon glyphicon-home"></span> Home</a>
-            <a ui-sref="" class="navbar-brand"><span class=" glyphicon glyphicon-shopping-cart"></span> Shopping
+            <a ui-sref="Home" class="navbar-brand"><span class="glyphicon glyphicon-barcode"></span> OStore</a>
+            <a ui-sref="Home" class="navbar-brand"><span class="glyphicon glyphicon-home"></span> Home</a>
+            <a ui-sref="Shopping_Cart" class="navbar-brand"><span class=" glyphicon glyphicon-shopping-cart"></span> Shopping
                 Cart</a>
-            <a ui-sref="" class="navbar-brand"><span class="glyphicon glyphicon-list"></span> Wishlist</a>
+            <a ui-sref="Shopping_Cart" class="navbar-brand"><span class="glyphicon glyphicon-list"></span> Wishlist</a>
+            <a ui-sref="About_Us" class="navbar-brand"><span class="glyphicon glyphicon-list"></span> Wishlist</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <form class="navbar-form navbar-right">
-                <button type="submit" class="btn btn-info" style="display: inline;">Register</button>
+                <md-button ng-click="goToRegister()" class="md-raised md-primary" style="display: inline;">Register</md-button>
                 &nbsp;
-                <button type="submit" class="btn btn-default pull-right" style="display: inline;">Login</button>
+                <md-button ng-click="goToLogin()" class="md-raised  pull-right" style="display: inline;">Login</md-button>
             </form>
 
         </div>
