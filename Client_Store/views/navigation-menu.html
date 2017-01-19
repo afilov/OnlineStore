@@ -20,9 +20,8 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <form class="navbar-right">
-                <a ui-sref="Register" class="navbar-brand" style="display: inline;">Register</a>
-                &nbsp;
-                <a ui-sref="Login" class="navbar-brand pull-right" style="display: inline;">Login</a>
+                <a ng-if="$root.isAuthenticated() == false" ui-sref="Login" class="navbar-brand pull-right" style="display: inline;">Login / Register</a>
+                <a ng-if="$root.isAuthenticated() == true" ng-click="$root.Logout()" class="navbar-brand pull-right" style="display: inline;">Logout</a>
             </form>
 
         </div>

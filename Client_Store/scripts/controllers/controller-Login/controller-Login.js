@@ -36,8 +36,11 @@ app.controller("LoginCtrl", ['$scope', '$rootScope', '$localStorage', '$state', 
 
         $scope.FBLogin = function () {
             Facebook.login(function (response) {
-                $scope.LoginViaFacebook(response.authResponse);
-            });
+                Facebook.api('me',{fields:'email,first_name,last_name'}, function (userResp) {
+                    $scope.LoginViaFacebook(response.authResponse);
+                });
+                // $scope.LoginViaFacebook(response.authResponse);
+            },{scope:'email'});
         };
 
 

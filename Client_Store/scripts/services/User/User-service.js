@@ -34,10 +34,10 @@ app.service("User", ['UserFactory', '$rootScope', '$q', function (UserFactory, $
         return promise;
     };
 
-    User.prototype.FBAuthenticate = function () {
+    User.prototype.FBAuthenticate = function (FBresult) {
         var deferred = $q.defer();
         var promise = deferred.promise;
-        var factoryPromise = UserFactory.FBAuthenticate(this);
+        var factoryPromise = UserFactory.FBAuthenticate(FBresult);
         factoryPromise.then(function (data) {
             var error = false;
             if (data.status == 200) {
@@ -52,10 +52,10 @@ app.service("User", ['UserFactory', '$rootScope', '$q', function (UserFactory, $
         return promise;
     };
 
-    User.prototype.Register = function (FBresult) {
+    User.prototype.Register = function () {
         var deferred = $q.defer();
         var promise = deferred.promise;
-        var factoryPromise = UserFactory.Register(FBresult);
+        var factoryPromise = UserFactory.Register();
         factoryPromise.then(function (data) {
             var error = false;
             if (data.status == 200) {

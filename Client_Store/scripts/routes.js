@@ -60,7 +60,22 @@ app.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
             //        }
             //    }
             //})
-            
-
+        $httpProvider.interceptors.push(['$q', '$location', '$localStorage', function ($q, $location, $localStorage) {
+            return {
+                'request': function (config) {
+                    config.headers = config.headers || {};
+                    if ($localStorage.UserData && $localStorage.UserData.Token && config.url.endsWith('.html') == false) {
+                        config.headers.Authorization = 'Bearer ' + $localStorage.UserData.Token;
+                    }
+                    return config;
+                },
+                'responseError': function (response) {
+                    if (response.status === 401 || response.status === 403) {
+                        $localStorage.UserData = null;
+                    }
+                    return $q.reject(response);
+                }
+            };
+        }]);
 
     }]);

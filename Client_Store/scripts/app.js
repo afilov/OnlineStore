@@ -18,8 +18,8 @@ app.config(['FacebookProvider',
     }]);
 
 
-app.run(['$rootScope', '$localStorage', '$q', '$location', '$mdToast',
-    function ($rootScope, ngToast, $localStorage, $q, $location, $mdToast) {
+app.run(['$rootScope', '$localStorage', '$q', '$location', '$mdToast', '$state',
+    function ($rootScope, $localStorage, $q, $location, $mdToast, $state) {
         $rootScope.PageTitle = "Start";
         $rootScope.currentState = null;
         $rootScope.activeStates = [];
@@ -34,6 +34,12 @@ app.run(['$rootScope', '$localStorage', '$q', '$location', '$mdToast',
             }
             return $rootScope.User != null;
         };
+
+        $rootScope.Logout = function () {
+            $localStorage.UserData = {};
+            $rootScope.User = {};
+            $state.go("Login");
+        }
 
         $rootScope.showActionToast = function (Text) {
             var toast = $mdToast.simple()
