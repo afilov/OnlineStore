@@ -99,6 +99,14 @@ div.scrollmenu a:hover {
 
 .tab-content {
     overflow: hidden; }
+
+.backgroundImage{
+    background: url(background.jpg) no-repeat center center fixed; !important;
+
+}
+.changeFont{
+    font-family: "Comic Sans MS", cursive, sans-serif;
+}
 .tab-content img {
     display: block;
     margin: auto;

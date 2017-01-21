@@ -14,22 +14,15 @@
             <div class="thumbnail">
                 <img ng-src={{product.ImageURL}}>
             </div>
-            <h4>{{product.Name}}</h4>
+            <h3><b>{{product.Name}}</b></h3>
 
             <p class="details">
                 {{product.Description.slice(0,40)}}...
             </p>
-            <h4 class="pull-left">Price: <span class="label label-success">$ {{product.Price}}</span></h4>
-            <h5 class="pull-right" ng-click="goToDetails(product)">More info <span
-                    class="glyphicon glyphicon-info-sign"></span></h5><br><br><br>
-            <section class="text-right">
-                <md-button class="md-raised md-primary">
-                    <span class="glyphicon glyphicon-plus" ng-click="addToCart(product)"></span> cart
-                </md-button>
-                <md-button class="md-raised md-warn">
-                    <span class="glyphicon glyphicon-plus" ng-click="addToWishlist(product)"></span> wishlist
-                </md-button>
-            </section>
+            <h4 class="pull-left"><b>Price:</b> <span class="label label-success">$ {{product.Price}}</span></h4>
+            <md-button class="md-raised md-primary pull-right" ng-click="goToDetails(product)">
+                <span class="glyphicon glyphicon-shopping-cart"></span> Buy Now
+            </md-button>
         </div>
     </md-list-item>
     <p class="h3" ng-if="Products.length==0">There are no products in this category yet.</p>

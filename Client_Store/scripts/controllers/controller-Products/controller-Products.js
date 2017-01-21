@@ -1,10 +1,11 @@
 "use strict";
 
-app.controller("ProductManagementCtrl", ['$scope', '$rootScope', '$localStorage', '$state', '$mdSidenav', 'Category', 'CategoryFactory', 'Product',
-    function ($scope, $rootScope, $localStorage, $state, $mdSidenav, Category, CategoryFactory, Product) {
+app.controller("ProductManagementCtrl", ['$scope', '$rootScope', '$localStorage', '$state', '$mdSidenav', 'Category', 'CategoryFactory', 'Product', 'CartProduct',
+    function ($scope, $rootScope, $localStorage, $state, $mdSidenav, Category, CategoryFactory, Product, CartProduct) {
 
         var CategoryInstance = new Category();
         var ProductInstance = new Product();
+
         $scope.Products = [];
         $scope.Categories = [];
         $scope.selectedCategory;
@@ -14,9 +15,27 @@ app.controller("ProductManagementCtrl", ['$scope', '$rootScope', '$localStorage'
         };
 
         $scope.addToCart = function (product) {
+            var tmpCartProduct = new CartProduct();
+            tmpCartProduct.ProductId = product._id;
+            tmpCartProduct.Wish = false;
+            $scope.updateCartProduct(tmpCartProduct);
+            $rootScope.showActionToast('Added to ShoppingCart');
 
         };
+
+        $scope.updateCartProduct = function (cartProduct) {
+            var promise = cartProduct.Create();
+            promise.then(function (data) {
+            }, function (err) {
+                console.log(err);
+            })
+        };
         $scope.addToWishlist = function (product) {
+            var tmpCartProduct = new CartProduct();
+            tmpCartProduct.ProductId = product._id;
+            tmpCartProduct.Wish = true;
+            $scope.updateCartProduct(tmpCartProduct);
+            $rootScope.showActionToast('Added to WishList');
 
         };
 

@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container backgroundImage" >
     <div class="row">
         <div class="col-md-6 col-xs-6">
             <div class="panel panel-info">
@@ -9,7 +9,7 @@
                                 <h5><span class="glyphicon glyphicon-shopping-cart"></span> Shopping Cart</h5>
                             </div>
                             <div class="col-xs-6">
-                                <button type="button" class="btn btn-primary btn-sm btn-block" ng-click="continueShop()">
+                                <button type="button" aria-label="continue" class="btn btn-primary btn-sm btn-block" ng-click="continueShop()">
                                     <span class="glyphicon glyphicon-share-alt"></span> Continue shopping
                                 </button>
                             </div>
@@ -17,21 +17,26 @@
                     </div>
                 </div>
                 <div class="panel-body">
-                    <div class="row" ng-repeat="product in shoppedProducts">
-                        <div class="col-xs-2"><img width="100px" height="70px"  class="img-responsive" ng-src="{{product.ImageURL}}">
+                    <div class="row" ng-if="cartProduct.Wish == false" ng-repeat="cartProduct in cartProducts">
+                        <div class="col-xs-2">
+                            <img width="100px" height="70px"  class="img-responsive" ng-src="{{cartProduct.Product.ImageURL}}">
                         </div>
-                        <div class="col-xs-4">
-                            <h4 class="product-name"><strong>{{product.Name}}</strong></h4><h4><small>{{product.Description.slice(0,30)}}...</small></h4>
+                        <div class="col-xs-3">
+                            <h4 class="product-name"><strong>{{cartProduct.Product.Name}}</strong></h4>
+                            <h4><small>{{cartProduct.Product.Description.slice(0,30)}}...</small></h4>
                         </div>
                         <div class="col-xs-6">
-                            <div class="col-xs-6 text-right">
-                                <h6><strong>{{product.Price}}.00 <span class="text-muted">x</span></strong></h6>
+                            <div class="col-xs-4 text-right">
+                                <h6>{{cartProduct.Quantity}}</h6><span class="text-muted">x</span>
                             </div>
                             <div class="col-xs-4">
-                                <input type="text" class="form-control input-sm" ng-model="product.Quantity">
+                                <h6><strong>${{cartProduct.Product.Price}}.00</strong></h6>
                             </div>
-                            <div class="col-xs-2">
-                                <button type="button" class="btn btn-link btn-xs">
+                            <div class="col-xs-4">
+                                <button  class="btn btn-warn btn-xs" aria-label="addCart" ng-click="addToWishList(cartProduct)">
+                                    <span class="glyphicon glyphicon-arrow-right"> </span>
+                                </button>
+                                <button  class="btn btn-primary btn-xs" aria-label="addWish" ng-click="removeFromShoppingCart(cartProduct)">
                                     <span class="glyphicon glyphicon-trash"> </span>
                                 </button>
                             </div>
@@ -45,7 +50,7 @@
                             <h4 class="text-right">Total <strong>$ {{total}}</strong></h4>
                         </div>
                         <div class="col-xs-3">
-                            <button type="button" class="btn btn-success btn-block" ng-click="checkout()">
+                            <button type="button" class="btn btn-success btn-block" aria-label="checkout" ng-click="checkout()">
                                 Checkout
                             </button>
                         </div>
@@ -60,15 +65,21 @@
                     <span class="glyphicon glyphicon-list"></span> Wishlist <div class="pull-right"><small><a class="afix-1" href="#">Edit Cart</a></small></div>
                 </div>
                 <div class="panel-body">
-                    <div class="form-group" ng-repeat="">
+                    <div class="form-group" ng-if="cartProduct.Wish == true" ng-repeat="cartProduct in cartProducts">
                         <div class="col-sm-3 col-xs-3">
-                            <img class="img-responsive" width="100px" height="70px" ng-src="{{product.ImageURL}}" />
+                            <img class="img-responsive" width="100px" height="70px" ng-src="{{cartProduct.ImageURL}}" />
                         </div>
                         <div class="col-sm-6 col-xs-6">
-                            <div class="col-xs-12">{{product.Name}}</div>
+                            <div class="col-xs-12">{{cartProduct.Name}}</div>
                         </div>
                         <div class="col-sm-3 col-xs-3 text-right">
-                            <h6><span>$</span>{{product.Price}}.00</h6>
+                            <h6><span>$</span>{{cartProduct.Price}}.00</h6>
+                            <md-button  class="btn btn-link btn-xs" aria-label="addCart" ng-click="addToShoppingCart(cartProduct)">
+                                <span class="glyphicon glyphicon-arrow-left"> </span>
+                            </md-button>
+                            <md-button  class="btn btn-link btn-xs" aria-label="remove" ng-click="removeFromWishlist(cartProduct)">
+                                <span class="glyphicon glyphicon-trash"> </span>
+                            </md-button>
                         </div>
                         <br>
                         <hr /><br>

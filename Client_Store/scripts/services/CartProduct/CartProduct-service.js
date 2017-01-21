@@ -8,7 +8,7 @@ app.service("CartProduct", ['CartProductFactory', '$rootScope', '$q',
             this.Product = {};
             this.Wish = false;
             this.Quantity = null;
-            this.Price = null;
+            this.Total = null;;
             if (angular.isDefined(data) == true) {
                 angular.extend(this, data);
             }

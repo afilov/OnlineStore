@@ -20,7 +20,7 @@ app.run(['$rootScope', 'ngToast', '$localStorage', '$q', '$location', '$mdToast'
         $rootScope.activeStates = [];
 
         $rootScope.User = null;
-        $rootScope.serverUrl = "http://192.168.0.104:3003";
+        $rootScope.serverUrl = "http://192.168.0.101:3003";
 
 
         $rootScope.isAuthenticated = function () {

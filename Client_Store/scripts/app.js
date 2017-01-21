@@ -25,13 +25,14 @@ app.run(['$rootScope', '$localStorage', '$q', '$location', '$mdToast', '$state',
         $rootScope.activeStates = [];
 
         $rootScope.User = null;
-        $rootScope.serverUrl = "http://192.168.0.104:3003";
+        $rootScope.serverUrl = "http://192.168.0.101:3003";
 
 
         $rootScope.isAuthenticated = function () {
             if ($localStorage.UserData && $localStorage.UserData && $localStorage.UserData != $rootScope.User) {
                 $rootScope.User = $localStorage.UserData;
             }
+
             return $rootScope.User != null;
         };
 
@@ -39,7 +40,7 @@ app.run(['$rootScope', '$localStorage', '$q', '$location', '$mdToast', '$state',
             $localStorage.UserData = null;
             $rootScope.User = null;
             $state.go("Login");
-        }
+        };
 
         $rootScope.showActionToast = function (Text) {
             var toast = $mdToast.simple()

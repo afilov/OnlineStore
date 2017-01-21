@@ -1,31 +1,38 @@
 <div class="container">
-        <div class="container-fliud">
-            <div class="row">
-                <md-button  class="pull-right md-raised md-primary" ng-click="Back()" aria-label="test">Back</md-button>
-            </div>
-            <p class="h2" style="color: dodgerblue;">{{currentProduct.Name}}</p>
-            <div class="wrapper row">
+    <div class="container-fliud">
+        <div class="row">
+            <md-button class="pull-right md-raised md-primary" ng-click="Back()" aria-label="test">Back</md-button>
+        </div>
+        <p class="h2" style="color: dodgerblue;">{{currentProduct.Name}}</p>
+
+        <div class="wrapper row">
 
 
-                <div class="preview col-md-5">
+            <div class="preview col-md-5">
 
-                    <div class="tab-content">
+                <div class="tab-content">
 
-                        <div class="tab-pane active" id="pic-1"><img width="320" height="250" ng-src="{{currentProduct.ImageURL}}" /></div>
-                    </div>
-
+                    <div class="tab-pane active" id="pic-1"><img width="320" height="250"
+                                                                 ng-src="{{currentProduct.ImageURL}}"/></div>
                 </div>
-                <div class="col-md-6">
-                    <p class="product-description">{{currentProduct.Description}}</p><br>
-                    <p class="h4">Current price: <span class="label label-default">$ {{currentProduct.Price}}</span></p><br>
-                    <p class="h4">Enter quantity </p>
-                    <input type="number" class="col-md-2" ng-model="currentProduct.Quantity"/><br><br>
-                    <div>
-                        <button class="btn btn-success">Buy now</button>
-                        <button class="btn btn-info">Add to cart</button>
 
-                    </div>
+            </div>
+            <div class="col-md-6">
+                <p class="product-description">{{currentProduct.Description}}</p><br>
+
+                <p class="h4">Current price: <span class="label label-default">$ {{currentProduct.Price}}</span></p><br>
+
+                <p class="h4">Enter quantity </p>
+
+                <form><input type="number" min="1" class="col-md-2" ng-model="Quantity" ng-required="true"/></form>
+                <br><br>
+
+                <div>
+                    <button class="btn btn-success" ng-click="checkout()">Buy now</button>
+                    <button class="btn btn-info" ng-click="addToCart()">Add to cart</button>
+                    <button class="btn btn-warning" ng-click="addToWishlist()">Add to wishlist</button>
                 </div>
             </div>
         </div>
+    </div>
 </div>

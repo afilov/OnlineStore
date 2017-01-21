@@ -37,13 +37,7 @@ app.controller("MainCtrl", ['$scope', '$rootScope', '$localStorage', '$state', '
                     Children: []
                 },
                 {
-                    Title: "Reports",
-                    Group: "reports",
-                    CssClass: "fa fa-barcode",
-                    Children: []
-                },
-                {
-                    Title: "Paypal",
+                    Title: "Paypal reports",
                     Group: "paypal",
                     CssClass: "fa fa-barcode",
                     Children: []

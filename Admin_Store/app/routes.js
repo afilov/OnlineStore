@@ -101,17 +101,6 @@ app.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
                     }
                 }
             })
-            .state('Reports', {
-                url: '^/reports',
-                menuGroup: 'reports',
-                menuTitle: 'Reports',
-                views: {
-                    '@': {
-                        templateUrl: 'app/scripts/reports/reports.view.html',
-                        controller: 'ReportsCtrl'
-                    }
-                }
-            })
             .state('Settings', {
                 url: '^/settings/account',
                 menuGroup: 'settings',
