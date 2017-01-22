@@ -27,8 +27,8 @@ app.factory('UserFactory', ['$rootScope', '$http', '$timeout', '$q', function ($
         Register : function (data) {
             return $http({
                 method: 'POST',
-                url: $rootScope.serverUrl + '/user/register',
-                withCredentials: true,
+                url: $rootScope.serverUrl + '/user/app/register',
+                withCredentials: false,
                 data: data
             })
         }

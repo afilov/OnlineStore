@@ -100,7 +100,7 @@ module.exports = function Services() {
 
     Restify.AddPutService('/user/update', true, Modules.User.Update);
 
-    Restify.AddPostService('/user/register', false, Modules.User.Register);
+    Restify.AddPostService('/user/app/register', false, Modules.User.Register);
 
     Restify.AddGetService('/users/all',true,Modules.User.GetAll);
 

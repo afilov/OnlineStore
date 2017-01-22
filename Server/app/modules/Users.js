@@ -126,13 +126,13 @@ Method.Register = function (req, res, next) {
                 Restify.RespondError(res, 500, "DB Error");
             }
             else if (user != null) {
-                Restify.RespondError(res, 401, "Email already exists");
+                Restify.RespondError(res, 400, "Email already exists");
             }
             else {
                 tmpUser.Password = md5(tmpUser.Password);
                 UserModel.create(tmpUser, function (err, user) {
                     if (err) {
-                        Restify.RespondError(res, 401, "DB Error");
+                        Restify.RespondError(res, 400, "DB Error");
                     }
                     else {
                         global.OStore.Modules.Mailer.SendWelcomeEmail(user);
