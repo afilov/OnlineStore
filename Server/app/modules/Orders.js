@@ -14,8 +14,10 @@ var OrderSchema = new Schema({
     Quantity: Number,
     PayPalId: String,
     PaymentLinks: Array,
-    DateCompleted:Date,
-    DateCreated: Date
+    DateCompleted: Date,
+    DateCreated: Date,
+    DateConfirmed: Date,
+    Confirmed: Boolean
 });
 
 var OrderModel = mongoose.model('Order', OrderSchema);
@@ -35,6 +37,8 @@ function Order(data) {
     this.PaymentLinks = [];
     this.DateCreated = new Date();
     this.DateCompleted = null;
+    this.DateConfirmed = null;
+    this.Confirmed = false;
     if (data) {
         extend(this, data);
     }
@@ -42,8 +46,28 @@ function Order(data) {
 
 var Method = Order.prototype;
 
-Method.CreateOrder = function (req, res, next) {
 
+Method.GetAll = function (req, res, next) {
+    OrderModel.find(function (err, users) {
+        if (err) {
+            Restify.RespondError(res, 404, "DB Error");
+        }
+        else {
+            Restify.RespondSuccess(res, users);
+        }
+    }).sort({DateCompleted: 1})
+};
+
+
+Method.GetById = function (req, res, next) {
+    OrderModel.findById(req.params._id, function (err, order) {
+        if (err) {
+            Restify.RespondError(res, 404, "DB Error");
+        }
+        else {
+            Restify.RespondSuccess(res, order);
+        }
+    })
 };
 
 module.exports = Order;

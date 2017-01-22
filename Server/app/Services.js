@@ -154,6 +154,9 @@ module.exports = function Services() {
         }
     });
 
+    Restify.AddGetService('/get/orders', true, Modules.Order.GetAll);
+
+    Restify.AddGetService('/get/order/:_id', true, Modules.Order.GetById);
 
 
     //admin users

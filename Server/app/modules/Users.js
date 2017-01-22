@@ -209,7 +209,7 @@ Method.GetByID = function (req, res, next) {
 Method.GetAll = function (req,res,next) {
     UserModel.find(function (err, users) {
         if (err) {
-            Restify.RespondError(res, 404, "User does not exist");
+            Restify.RespondError(res, 404, "DB Error");
         }
         else {
             Restify.RespondSuccess(res, users);
