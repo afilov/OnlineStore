@@ -55,7 +55,7 @@ app.service("User", ['UserFactory', '$rootScope', '$q', function (UserFactory, $
     User.prototype.Register = function () {
         var deferred = $q.defer();
         var promise = deferred.promise;
-        var factoryPromise = UserFactory.Register();
+        var factoryPromise = UserFactory.Register(this);
         factoryPromise.then(function (data) {
             var error = false;
             if (data.status == 200) {
