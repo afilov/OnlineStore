@@ -42,12 +42,45 @@ module.exports = function PayPal_API() {
         }
     };
 
+    this.transformCartProducts = function (products) {
+        var cartProducts = [];
+        for (var i = 0; i < products.length; i++) {
+            var cartProduct = products[i];
+            cartProducts.push( {
+                "name": cartProduct.Product.Name,
+                "sku": cartProduct.Product._id,
+                "price": cartProduct.Product.Price,
+                "currency": "USD",
+                "quantity": cartProduct.Quantity
+            })
+        }
+        return cartProducts;
+    };
+    this.calculateTotalCart = function (products) {
+        var total = 0;
+        for (var i = 0; i < products.length; i++) {
+            var cartProduct = products[i];
+            total+= cartProduct.Total;
+        }
+        return total;
+    }
+
 
     this.CreateOrderSingleProduct = function (product, quantity, callBack) {
         var order = this.createBlankOrder("http://localhost:3031/#!/products/product/"+ product._id+"/");
         var OrderProduct = this.transformProduct(product, quantity);
         order.transactions[0].item_list.items.push(OrderProduct);
         order.transactions[0].amount.total = quantity * product.Price;
+        paypal.payment.create(order, function (error, payment) {
+            callBack(error, payment);
+        });
+    };
+
+    this.CheckOutCartProducts = function (products,callBack) {
+        var order = this.createBlankOrder("http://localhost:3031/#!/shopcart/");
+        var CartProducts = this.transformCartProducts(products);
+        order.transactions[0].item_list.items = CartProducts;
+        order.transactions[0].amount.total = this.calculateTotalCart(products);
         paypal.payment.create(order, function (error, payment) {
             callBack(error, payment);
         });
