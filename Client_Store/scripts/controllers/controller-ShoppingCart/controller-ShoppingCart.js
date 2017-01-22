@@ -22,23 +22,44 @@ app.controller("ShopCartCtrl", ['$scope', '$rootScope', '$localStorage', '$state
             $state.go('Products');
         };
 
-        $scope.addToWishList = function (product) {
+        $scope.removeFromList = function (product) {
+            //var promise = cartProductInstance.Delete();
+            //promise
+        };
+
+        $scope.updateCartProduct = function (product) {
+            var promise = product.Update();
+            promise.then(function (data) {
+            }, function (err) {
+                console.log(err);
+            });
+        };
+        $scope.deleteCartProduct = function (product) {
+            var promise = product.Delete();
+            promise.then(function (data) {
+            }, function (err) {
+                console.log(err);
+            });
+            $scope.getAllCartProducts();
 
         };
-        $scope.addToShoppingCart = function (product) {
+        $scope.addToWishList = function (product) {
             product.Wish = true;
+            $scope.updateCartProduct(product);
+        };
+        $scope.addToShoppingCart = function (product) {
+            product.Wish = false;
+            $scope.updateCartProduct(product);
         };
         $scope.removeFromShoppingCart = function (product) {
-            var index = $scope.cartProducts.indexOf(product);
-            $scope.cartProducts.splice(index, 1);
+            $scope.deleteCartProduct(product);
         };
         $scope.removeFromWishlist = function (product) {
-            var index = $scope.cartProducts.indexOf(product);
-            $scope.cartProducts.splice(index, 1);
+            $scope.deleteCartProduct(product);
         };
 
         $scope.checkout = function () {
 
-        }
+        };
 
     }]);

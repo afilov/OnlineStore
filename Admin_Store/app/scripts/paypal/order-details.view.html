@@ -1,0 +1,51 @@
+<md-card class="md-default-theme">
+
+    <div class="md-toolbar-tools">
+        <h2>
+            <span>Order Details</span>
+        </h2>
+        <span flex></span>
+        <md-button type="submit" class="md-raised md-warn"
+                   ui-sref="Order_List">
+            Back
+        </md-button>
+        <span></span>
+        <!--buttons-->
+
+    </div>
+    <div layout="row">
+        <md-card class="md-default-theme md-whiteframe-5dp" flex>
+            <md-toolbar layout="row">
+                <div class="md-toolbar-tools">
+                    <h3>Order</h3>
+                </div>
+            </md-toolbar>
+            <md-card-content>
+                <form name="projectForm" class="form-horizontal">
+                    <md-input-container class="md-block">
+                        <label>Name</label>
+                        <input type="text" ng-model="currentOrder.Name"/>
+                    </md-input-container>
+                    <md-input-container class="md-block">
+                        <label>Name</label>
+                        <input type="text" ng-model="currentOrder.Name"/>
+                    </md-input-container>
+                    <md-input-container class="md-block">
+                        <label>Name</label>
+                        <input type="text" ng-model="currentOrder.Name"/>
+                    </md-input-container>
+                    <md-input-container class="md-block">
+                        <label>Name</label>
+                        <input type="text" ng-model="currentOrder.Name"/>
+                    </md-input-container>
+                    <md-input-container class="md-block" ng-if="IsNew == false">
+                        <label>Created On</label>
+                        <input type="date" ng-disabled="true" ng-model="currentOrder.CreatedOn"/>
+                    </md-input-container>
+                </form>
+            </md-card-content>
+        </md-card>
+    </div>
+    </div>
+</md-card>
+

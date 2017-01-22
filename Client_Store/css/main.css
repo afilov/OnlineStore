@@ -8,6 +8,10 @@
     width: 100%;
 
 }
+html, body {
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+}
 
 .alert {
     padding: 20px;
@@ -90,6 +94,7 @@ div.scrollmenu a:hover {
     margin-right: 2.5%; }
 .preview-thumbnail.nav-tabs li img {
     max-width: 100%;
+
     display: block; }
 .preview-thumbnail.nav-tabs li a {
     padding: 0;

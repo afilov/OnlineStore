@@ -101,6 +101,16 @@ app.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
                     }
                 }
             })
+            .state('Order_Details', {
+                parent: 'Paypal',
+                url: '^/paypal/order/:orderid',
+                views: {
+                    '@': {
+                        templateUrl: 'app/scripts/paypal/paypal.view.html',
+                        controller: 'PaypalCtrl'
+                    }
+                }
+            })
             .state('Settings', {
                 url: '^/settings/account',
                 menuGroup: 'settings',
@@ -111,7 +121,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
                         controller: 'SettingsCtrl'
                     }
                 }
-            })
+            });
 
 
         $httpProvider.interceptors.push(['$q', '$location', '$localStorage', function ($q, $location, $localStorage) {
