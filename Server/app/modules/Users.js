@@ -4,7 +4,6 @@ var Schema = mongoose.Schema;
 var md5 = require('md5');
 var extend = require('util')._extend;
 var FB = require('fb');
-
 var UserSchema = new Schema({
     FirstName: String,
     LastName: String,
@@ -89,14 +88,17 @@ Method.FBAuthenticate = function (req, res, next) {
                             }
                             else if (user == null) {
                                 var tmpUser = new RefModules.User({FirstName:result.first_name,LastName:result.last_name,Email:result.email,FacebookID:result.id});
-                                UserModel.create(tmpUser, function (err, user) {
+                                delete tmpUser._id;
+                                var newUser = new UserModel();
+                                extend(newUser._doc, tmpUser);
+                                UserModel.create(newUser._doc, function (err, user) {
                                     if (err) {
                                         Restify.RespondError(res, 401, "DB Error");
                                     }
                                     else {
                                         global.OStore.Modules.Mailer.SendWelcomeEmail(user);
-                                        user._doc.Token = Restify.CreateToken(user._doc);
-                                        Restify.RespondSuccess(res, user);
+                                        newUser._doc.Token = Restify.CreateToken(newUser._doc);
+                                        Restify.RespondSuccess(res, newUser);
                                     }
                                 })
                             }
@@ -130,14 +132,17 @@ Method.Register = function (req, res, next) {
             }
             else {
                 tmpUser.Password = md5(tmpUser.Password);
+                delete tmpUser._id;
+                var newUser = new UserModel();
+                extend(newUser._doc, tmpUser);
                 UserModel.create(tmpUser, function (err, user) {
                     if (err) {
                         Restify.RespondError(res, 400, "DB Error");
                     }
                     else {
                         global.OStore.Modules.Mailer.SendWelcomeEmail(user);
-                        user._doc.Token = Restify.CreateToken(user._doc);
-                        Restify.RespondSuccess(res, user);
+                        newUser._doc.Token = Restify.CreateToken(newUser._doc);
+                        Restify.RespondSuccess(res, newUser);
                     }
                 })
             }
