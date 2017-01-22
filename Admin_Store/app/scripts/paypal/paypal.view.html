@@ -9,10 +9,11 @@
                     <thead md-head>
                     <tr md-row>
                         <th md-column>ID</th>
-                        <th md-column>order Category</th>
-                        <th md-column>order Name</th>
-                        <th md-column>order Price</th>
+                        <th md-column>Products bought</th>
+                        <th md-column>Order Total</th>
                         <th md-column>Date Created</th>
+                        <th md-column>Date Completed</th>
+                        <th md-column>Date Confirmed</th>
                     </tr>
                     </thead>
                     <tbody class="md-body-1">
@@ -22,15 +23,25 @@
                             {{order._id}}
                         </td>
 
-                        <td md-cell>
-                            {{order.Name}}
+                        <td md-cell ng-if="order.CartProducts.length==0">
+                            {{order.Quantity}}
+                        </td>
+                        <td md-cell ng-if="order.CartProducts.length>0">
+                            {{order.CartProducts.length}}
                         </td>
                         <td md-cell>
-                            {{order.Price}}
+                            {{order.Total}}
                         </td>
                         <td md-cell>
-                            {{order.CreatedOn | date : "dd.MM.y"}}
+                            {{order.DateCreated | date : "dd.MM.y"}}
                         </td>
+                        <td md-cell>
+                            {{order.DateCompleted | date : "dd.MM.y"}}
+                        </td>
+                        <td md-cell>
+                            {{order.DateConfirmed | date : "dd.MM.y"}}
+                        </td>
+
                     </tr>
                     </tbody>
                 </table>

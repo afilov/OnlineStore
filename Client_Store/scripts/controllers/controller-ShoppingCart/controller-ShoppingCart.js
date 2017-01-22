@@ -19,14 +19,23 @@ app.controller("ShopCartCtrl", ['$scope', '$rootScope', '$localStorage', '$state
         };
         $scope.getAllCartProducts();
 
+        $scope.calculateTotal = function () {
+            var total = 0;
+            if (angular.isDefined($scope.cartProducts)) {
+                for (var i = 0; i < $scope.cartProducts.length; i++) {
+                    if ($scope.cartProducts[i].Wish == false) {
+                        total += $scope.cartProducts[i].Total;
+                    }
+                }
+
+            }
+            return total;
+        };
+
         $scope.continueShop = function () {
             $state.go('Products');
         };
 
-        $scope.removeFromList = function (product) {
-            //var promise = cartProductInstance.Delete();
-            //promise
-        };
 
         $scope.updateCartProduct = function (product) {
             var promise = product.Update();
@@ -44,6 +53,7 @@ app.controller("ShopCartCtrl", ['$scope', '$rootScope', '$localStorage', '$state
             $scope.getAllCartProducts();
 
         };
+
         $scope.addToWishList = function (product) {
             product.Wish = true;
             $scope.updateCartProduct(product);
@@ -59,11 +69,14 @@ app.controller("ShopCartCtrl", ['$scope', '$rootScope', '$localStorage', '$state
             $scope.deleteCartProduct(product);
         };
 
-        if (angular.isDefined($stateParams.orderid)){
-            var promise = productInstance.ExecuteOrder({orderId:$rootScope.getParameterByName("paymentId"),payerId:$rootScope.getParameterByName("PayerID")});
+        if (angular.isDefined($stateParams.orderid)) {
+            var promise = productInstance.ExecuteOrder({
+                orderId: $rootScope.getParameterByName("paymentId"),
+                payerId: $rootScope.getParameterByName("PayerID")
+            });
             promise.then(function (data) {
                 $rootScope.showActionToast("Order Completed");
-            },function (err) {
+            }, function (err) {
                 $rootScope.showActionToast("Something went wrong");
             })
         }
