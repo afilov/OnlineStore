@@ -6,7 +6,7 @@
         </h2>
         <span flex></span>
         <md-button type="submit" class="md-raised md-warn"
-                   ui-sref="Order_List">
+                   ui-sref="Paypal">
             Back
         </md-button>
         <span></span>
@@ -17,30 +17,40 @@
         <md-card class="md-default-theme md-whiteframe-5dp" flex>
             <md-toolbar layout="row">
                 <div class="md-toolbar-tools">
-                    <h3>Order</h3>
+                    <h3>Order Information</h3>
                 </div>
             </md-toolbar>
             <md-card-content>
                 <form name="projectForm" class="form-horizontal">
-                    <md-input-container class="md-block">
-                        <label>Name</label>
-                        <input type="text" ng-model="currentOrder.Name"/>
+                    <md-input-container class="md-block" ng-if="currentOrder.CartProducts.length>0">
+                        <label>Products Bought</label>
+                        <input type="number" ng-model="currentOrder.CartProducts.length" ng-disabled="true"/>
+                    </md-input-container>
+                    <md-input-container class="md-block" ng-if="currentOrder.CartProducts.length==0">
+                        <label>Products Bought</label>
+                        <input type="number" ng-model="currentOrder.Quantity " ng-disabled="true"/>
                     </md-input-container>
                     <md-input-container class="md-block">
-                        <label>Name</label>
-                        <input type="text" ng-model="currentOrder.Name"/>
+                        <label>Order Total</label>
+                        <input type="number" ng-model="currentOrder.Total " ng-disabled="true"/>
                     </md-input-container>
                     <md-input-container class="md-block">
-                        <label>Name</label>
-                        <input type="text" ng-model="currentOrder.Name"/>
+                        <label>Date Created</label>
+                        <input type="date" ng-disabled="true" ng-model="currentOrder.DateCreated"/>
                     </md-input-container>
-                    <md-input-container class="md-block">
-                        <label>Name</label>
-                        <input type="text" ng-model="currentOrder.Name"/>
+                    <md-input-container class="md-block" ng-if="currentOrder.Completed==true">
+                        <label>Date Completed</label>
+                        <input type="date" ng-disabled="true" ng-model="currentOrder.DateCompleted"/>
                     </md-input-container>
-                    <md-input-container class="md-block" ng-if="IsNew == false">
-                        <label>Created On</label>
-                        <input type="date" ng-disabled="true" ng-model="currentOrder.CreatedOn"/>
+                    <md-input-container class="md-block" ng-if="currentOrder.Completed==false">
+                        <label>Order not completed</label>
+                    </md-input-container>
+                    <md-input-container class="md-block" ng-if="currentOrder.Confirmed==true">
+                        <label>Date Confirmed</label>
+                        <input type="date" ng-disabled="true" ng-model="currentOrder.DateConfirmed"/>
+                    </md-input-container>
+                    <md-input-container class="md-block" ng-if="currentOrder.Confirmed==false">
+                        <label>Order not confirmed</label>
                     </md-input-container>
                 </form>
             </md-card-content>

@@ -106,7 +106,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
                 url: '^/paypal/order/:orderid',
                 views: {
                     '@': {
-                        templateUrl: 'app/scripts/paypal/paypal.view.html',
+                        templateUrl: 'app/scripts/paypal/order-details.view.html',
                         controller: 'PaypalCtrl'
                     }
                 }

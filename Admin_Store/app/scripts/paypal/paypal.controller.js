@@ -25,9 +25,11 @@ app.controller('PaypalCtrl', ['$rootScope', '$scope', 'Order', '$state', '$state
     if ($stateParams.orderid != "" && $stateParams.orderid != undefined) {
         var currentID = $stateParams.orderid;
         var promise = orderInstance.GetOrderByID(currentID);
-        promise.then(function (category) {
-            $scope.currentOrder = category;
-            $scope.currentOrder.CreatedOn = new Date($scope.currentOrder.CreatedOn);
+        promise.then(function (order) {
+            $scope.currentOrder = order;
+            $scope.currentOrder.DateCreated = new Date($scope.currentOrder.DateCreated);
+            $scope.currentOrder.DateCompleted = new Date($scope.currentOrder.DateCompleted);
+            $scope.currentOrder.DateConfirmed = new Date($scope.currentOrder.DateConfirmed);
         });
     }
 

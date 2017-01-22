@@ -65,7 +65,7 @@
                                 <button class="btn btn-danger btn-sm" aria-label="addWish"
                                         ng-click="removeFromShoppingCart(cartProduct)">
                                     <span class="glyphicon glyphicon-trash"> </span>
-                                </button> /
+                                </button>
                                 <button class="btn btn-primary btn-sm" aria-label="addCart"
                                         ng-click="addToWishList(cartProduct)">
                                     <span class="glyphicon glyphicon-arrow-down"> </span>
@@ -86,7 +86,7 @@
                 <div class="panel-footer">
                     <div class="row text-center">
                         <div class="col-xs-9">
-                            <h4 class="text-right">Total <strong>$ {{total}}</strong></h4>
+                            <h4 class="text-right">Total <strong>$ {{calculateTotal()}}</strong></h4>
                         </div>
                         <div class="col-xs-3">
                             <button type="button" class="btn btn-success btn-block" aria-label="checkout"
@@ -153,8 +153,8 @@
                                     <button class="btn btn-danger btn-sm" aria-label="test"
                                             ng-click="removeFromWishlist(cartProduct)">
                                         <span class="glyphicon glyphicon-trash"> </span>
-                                    </button> /
-                                    <button class="btn btn-primary btn-sm" aria-label="addCart"
+                                    </button>/
+                                    <button class="btn btn-warn btn-sm" aria-label="addCart"
                                             ng-click="addToShoppingCart(cartProduct)">
                                         <span class="glyphicon glyphicon-arrow-up"> </span>
                                     </button>
