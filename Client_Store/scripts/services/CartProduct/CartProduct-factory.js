@@ -10,11 +10,11 @@ app.factory('CartProductFactory', ['$rootScope', '$http', '$timeout', '$q', func
         GetByID: function (id) {
             return $http({
                 method: 'GET',
-                url: $rootScope.serverUrl + '/user/cart/product/'+id,
+                url: $rootScope.serverUrl + '/user/cart/product/' + id,
                 withCredentials: true
             })
         },
-        Create : function (data) {
+        Create: function (data) {
             return $http({
                 method: 'POST',
                 url: $rootScope.serverUrl + '/user/create/cart/product',
@@ -22,12 +22,20 @@ app.factory('CartProductFactory', ['$rootScope', '$http', '$timeout', '$q', func
                 data: data
             })
         },
-        Update : function (data) {
+        Update: function (data) {
             return $http({
                 method: 'PUT',
                 url: $rootScope.serverUrl + '/user/cart/product',
                 withCredentials: true,
                 data: data
+            })
+        },
+        deleteCartProduct: function (id) {
+            return $http({
+                method: 'POST',
+                url: $rootScope.serverUrl + '/user/delete/cart/product',
+                withCredentials: true,
+                data: {_id: id}
             })
         }
     }

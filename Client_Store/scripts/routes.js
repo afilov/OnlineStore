@@ -72,6 +72,17 @@ app.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
                     }
                 }
             })
+
+            .state('Shopping_Cart_Order', {
+                url: '/shopcart/:orderid',
+                views: {
+                    '@': {
+                        templateUrl: '../views/shopping_cart.html',
+                        controller: 'ShopCartCtrl'
+                    }
+                }
+            })
+
             .state('About_Us', {
                 url: '/information',
                 views: {

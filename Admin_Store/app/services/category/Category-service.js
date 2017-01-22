@@ -1,3 +1,5 @@
+"use strict";
+
 app.service("Category", ['CategoryFactory', '$rootScope', '$q', function (CategoryFactory, $rootScope, $q) {
     var Category = function (data) {
         this._id = null;

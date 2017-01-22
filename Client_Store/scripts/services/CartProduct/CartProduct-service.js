@@ -8,12 +8,13 @@ app.service("CartProduct", ['CartProductFactory', '$rootScope', '$q',
             this.Product = {};
             this.Wish = false;
             this.Quantity = null;
-            this.Total = null;;
+            this.Total = null;
+            ;
             if (angular.isDefined(data) == true) {
                 angular.extend(this, data);
             }
         };
-        
+
 
         CartProduct.prototype.GetAll = function () {
             var deferred = $q.defer();
@@ -21,6 +22,9 @@ app.service("CartProduct", ['CartProductFactory', '$rootScope', '$q',
             var factoryPromise = CartProductFactory.GetAll();
             factoryPromise.then(function (data) {
                 var error = false;
+                for (var i = 0; i < data.data.length; i++) {
+                    data.data[i] = new CartProduct(data.data[i]);
+                }
                 if (data.status == 200) {
                     deferred.resolve(data);
                 }
@@ -86,7 +90,19 @@ app.service("CartProduct", ['CartProductFactory', '$rootScope', '$q',
             });
             return promise;
         };
-        
+        CartProduct.prototype.Delete = function () {
+            var deferred = $q.defer();
+            var promise = deferred.promise;
+            var factoryPromise = CartProductFactory.deleteCartProduct(this._id);
+            factoryPromise.then(function (data) {
+                $rootScope.showActionToast(data.data.Name + ' has been deleted!');
+                deferred.resolve(data.data);
+            }, function (err) {
+                deferred.reject(err);
+            });
+            return promise;
+        };
+
         return CartProduct;
 
     }]);
