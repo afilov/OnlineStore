@@ -69,7 +69,7 @@ app.controller('ProductDetailsCtrl', ['$rootScope', 'Product', '$scope', '$state
         };
 
         $scope.uploadFile = function (callBack) {
-            if (fileId == $scope.currentProduct.FileId){
+            if (fileId === $scope.currentProduct.FileId){
                 callBack();
             }
             else {   var fileId = null;
