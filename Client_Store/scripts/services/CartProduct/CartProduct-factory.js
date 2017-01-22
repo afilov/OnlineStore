@@ -37,6 +37,13 @@ app.factory('CartProductFactory', ['$rootScope', '$http', '$timeout', '$q', func
                 withCredentials: true,
                 data: {_id: id}
             })
+        },
+        checkoutCart: function (data) {
+            return $http({
+                method: 'GET',
+                url: $rootScope.serverUrl + '/user/checkout/cart/products',
+                withCredentials: true
+            })
         }
     }
 

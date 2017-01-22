@@ -102,6 +102,23 @@ app.service("CartProduct", ['CartProductFactory', '$rootScope', '$q',
             });
             return promise;
         };
+        CartProduct.prototype.Checkout = function () {
+            var deferred = $q.defer();
+            var promise = deferred.promise;
+            var factoryPromise = CartProductFactory.checkoutCart();
+            factoryPromise.then(function (data) {
+                var error = false;
+                if (data.status == 200) {
+                    deferred.resolve(data);
+                }
+                else {
+                    deferred.reject(error);
+                }
+            }, function (err, status) {
+                deferred.reject({err: err, status: status});
+            });
+            return promise;
+        };
 
         return CartProduct;
 

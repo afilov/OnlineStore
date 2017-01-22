@@ -1,10 +1,11 @@
 "use strict";
 
-app.controller("ShopCartCtrl", ['$scope', '$rootScope', '$localStorage', '$state', '$stateParams', '$mdSidenav', 'CartProduct',
-    function ($scope, $rootScope, $localStorage, $state, $stateParams, $mdSidenav, CartProduct) {
+app.controller("ShopCartCtrl", ['$scope', '$rootScope', '$localStorage', '$state', '$stateParams', '$mdSidenav', 'CartProduct', 'Product',
+    function ($scope, $rootScope, $localStorage, $state, $stateParams, $mdSidenav, CartProduct, Product) {
 
 
         var cartProductInstance = new CartProduct();
+        var productInstance = new Product();
 
         $scope.cartProducts = [];
 
@@ -58,8 +59,23 @@ app.controller("ShopCartCtrl", ['$scope', '$rootScope', '$localStorage', '$state
             $scope.deleteCartProduct(product);
         };
 
-        $scope.checkout = function () {
+        if (angular.isDefined($stateParams.orderid)){
+            var promise = productInstance.ExecuteOrder({orderId:$rootScope.getParameterByName("paymentId"),payerId:$rootScope.getParameterByName("PayerID")});
+            promise.then(function (data) {
+                $rootScope.showActionToast("Order Completed");
+            },function (err) {
+                $rootScope.showActionToast("Something went wrong");
+            })
+        }
 
+        $scope.checkout = function () {
+            var promise = cartProductInstance.Checkout();
+            promise.then(function (data) {
+                var orderURL = data.data.href;
+                window.location.href = orderURL;
+            }, function (err) {
+                console.log(err);
+            });
         };
 
     }]);
