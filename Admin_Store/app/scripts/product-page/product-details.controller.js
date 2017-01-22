@@ -9,6 +9,7 @@ app.controller('ProductDetailsCtrl', ['$rootScope', 'Product', '$scope', '$state
         $scope.CurrentID = null;
         $scope.IsNew = true;
         var fileId = null;
+        $scope.file = null;
 
         if ($stateParams.id != "" && $stateParams.id != undefined && $stateParams.id != "new") {
             $scope.IsNew = false;
@@ -69,10 +70,11 @@ app.controller('ProductDetailsCtrl', ['$rootScope', 'Product', '$scope', '$state
         };
 
         $scope.uploadFile = function (callBack) {
-            if (fileId === $scope.currentProduct.FileId){
+            if (fileId === $scope.currentProduct.FileId || !$scope.file) {
                 callBack();
             }
-            else {   var fileId = null;
+            else {
+                var fileId = null;
                 var data = {};
                 data.file = $scope.file;
                 if (angular.isDefined($scope.currentProduct.FileId) == true && $scope.currentProduct.FileId != null) {
@@ -84,6 +86,7 @@ app.controller('ProductDetailsCtrl', ['$rootScope', 'Product', '$scope', '$state
                     data: data
                 }).then(function (resp) {
                     console.log('Success ' + resp.config.data.file.name + ' uploaded. Response: ' + resp.data);
+                    $scope.file = null;
                     $scope.currentProduct.ImageURL = $rootScope.serverUrl + "/product/attachment/download/" + resp.data._id;
                     callBack();
                     $scope.currentProduct.FileId = resp.data._id;
@@ -92,7 +95,8 @@ app.controller('ProductDetailsCtrl', ['$rootScope', 'Product', '$scope', '$state
                 }, function (evt) {
                     var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
                     console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
-                });}
+                });
+            }
 
         };
 
