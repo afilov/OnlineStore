@@ -5,29 +5,36 @@ var extend = require('util')._extend;
 
 var OrderSchema = new Schema({
     Name: String,
+    UserId: String,
     Completed: Boolean,
-    ProductID: Number,
-    Price: Number,
-    VAT: Number,
+    ProductId: String,
+    CartProduct: Array,
+    Product: Object,
     Total: Number,
+    Quantity: Number,
+    PayPalId: String,
+    PaymentLinks: Array,
+    DateCompleted:Date,
     DateCreated: Date
 });
 
 var OrderModel = mongoose.model('Order', OrderSchema);
 var Restify = global.OStore.Restify;
-var RefModules = global.OStore.RefModules;
-
+var Modules = global.OStore.Modules;
 
 function Order(data) {
-    this.FirstName = null;
-    this.LastName = null;
-    this.Email = null;
-    this.Password = null;
-    this.Country = null;
-    this.City = null;
-    this.ZipCode = null;
-    this.Street = null;
+    this.Name = null;
+    this.UserId = null;
+    this.Completed = null;
+    this.ProductId = null;
+    this.CartProduct = {};
+    this.Product = {};
+    this.PayPalId = {};
+    this.Total = null;
+    this.Quantity = null;
+    this.PaymentLinks = [];
     this.DateCreated = new Date();
+    this.DateCompleted = null;
     if (data) {
         extend(this, data);
     }
@@ -35,7 +42,7 @@ function Order(data) {
 
 var Method = Order.prototype;
 
-Method.Create = function () {
+Method.CreateOrder = function (req, res, next) {
 
 };
 

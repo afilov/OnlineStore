@@ -56,6 +56,7 @@ app.service("Product", ['ProductFactory', '$rootScope', '$q', function (ProductF
         });
         return promise;
     };
+
     Product.prototype.GetProductByCategoryID = function (id) {
         var deferred = $q.defer();
         var promise = deferred.promise;
@@ -73,39 +74,27 @@ app.service("Product", ['ProductFactory', '$rootScope', '$q', function (ProductF
         return promise;
     };
 
-    Product.prototype.CreateProduct = function () {
-        var deferred = $q.defer();
-        var promise = deferred.promise;
-        var factoryPromise = ProductFactory.createProduct(this);
-        factoryPromise.then(function (product) {
-            var tmpProduct = new Product(product);
-            deferred.resolve(tmpProduct);
-        }, function (err) {
-            deferred.reject(err);
-        });
-        return promise;
-    };
 
-    Product.prototype.UpdateProduct = function () {
+    Product.prototype.ExecuteOrder = function (data) {
         var deferred = $q.defer();
         var promise = deferred.promise;
-        var factoryPromise = ProductFactory.updateProduct(this);
-        factoryPromise.then(function (product) {
-            var tmpProduct = new Product(product);
-            deferred.resolve(tmpProduct);
-        }, function (err) {
-            deferred.reject(err);
-        });
-        return promise;
-    };
-
-    Product.prototype.DeleteProduct = function () {
-        var deferred = $q.defer();
-        var promise = deferred.promise;
-        var factoryPromise = ProductFactory.deleteProduct(this._id);
+        var factoryPromise = ProductFactory.executeOrder(data);
         factoryPromise.then(function (data) {
-            $rootScope.showActionToast(data.data.Name + ' has been deleted!');
-            deferred.resolve(data.data);
+            deferred.resolve(data);
+        }, function (err) {
+            deferred.reject(err);
+        });
+        return promise;
+    };
+
+
+    Product.prototype.Buy = function (quantity) {
+        var deferred = $q.defer();
+        var promise = deferred.promise;
+        var factoryPromise = ProductFactory.buyProduct({product:this,quantity:quantity});
+        factoryPromise.then(function (paypalLink) {
+
+            deferred.resolve(paypalLink);
         }, function (err) {
             deferred.reject(err);
         });

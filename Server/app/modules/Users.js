@@ -196,7 +196,7 @@ Method.Update = function (req, res, next) {
 };
 
 Method.GetByID = function (req, res, next) {
-    UserModel.findById(req.params.id, function (err, user) {
+    UserModel.findById(req.params._id, function (err, user) {
         if (err) {
             Restify.RespondError(res, 404, "User does not exist");
         }

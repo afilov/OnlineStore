@@ -2,11 +2,14 @@
 var mime = require('mime');
 module.exports = function Services() {
     var Restify = global.OStore.Restify;
+    var mongoose = require('mongoose');
     var Modules = global.OStore.Modules;
 
     //products
 
     Restify.AddGetService('/get/products', false, Modules.Product.GetAll);
+
+    Restify.AddPostService('/buy/product', true, Modules.Product.Buy);
 
     Restify.AddGetService('/get/category/products/:_id', false, function (req, res, next) {
         Modules.Product.GetByFilter({CategoryId: req.params._id}, function (err, products) {
@@ -39,19 +42,6 @@ module.exports = function Services() {
         if (!req.files.file) {
             Restify.RespondError(res, 401, "No file recieved");
             next();
-        }
-        else if (req.body.fileId) {
-            Modules.DMS.DeleteFile(req.body.fileId, function (err, result) {
-                if (err) {
-                    Restify.RespondError(res, 401, "Error on deleting previous file");
-                    next();
-                }
-                else {
-                    Modules.DMS.SaveFile(req.files.file, function (err, file) {
-                        Restify.RespondSuccess(res, file);
-                    });
-                }
-            })
         }
         else {
             Modules.DMS.SaveFile(req.files.file, function (err, file) {
@@ -114,20 +104,54 @@ module.exports = function Services() {
 
     Restify.AddGetService('/users/all',true,Modules.User.GetAll);
 
-    Restify.AddGetService('/user/:id',true,Modules.User.GetByID);
+    Restify.AddGetService('/user/:_id',true,Modules.User.GetByID);
 
 
     //shopping cart
 
-    //Todo: create class shopping cart
 
-    Restify.AddGetService('/user/cartproducts', true, Modules.AdminUser.Authenticate);
+    Restify.AddGetService('/user/cart/products', true, Modules.CartProduct.GetAll);
 
-    Restify.AddGetService('/user/cartproduct/:id', true, Modules.AdminUser.Authenticate);
+    Restify.AddGetService('/user/cart/product/:_id', true, Modules.CartProduct.GetById);
 
-    Restify.AddPostService('/user/cartproduct', true, Modules.AdminUser.Authenticate);
+    Restify.AddPostService('/user/create/cart/product', true, Modules.CartProduct.Create);
 
-    Restify.AddPutService('/user/cartproduct', true, Modules.AdminUser.Authenticate);
+    Restify.AddPostService('/user/delete/cart/product', true, Modules.CartProduct.Delete);
+
+    Restify.AddPutService('/user/cart/product', true, Modules.CartProduct.Update);
+
+
+    //orders
+
+    Restify.AddGetService('/execute/order/:orderId/:payerId', true, function (req,res,next) {
+        if (!req.params.orderId || !req.params.payerId){
+            Restify.RespondError(res,400,"missing params");
+        }
+        else {
+            var OrderModel = mongoose.model('Order');
+            OrderModel.findOne({PayPalId:req.params.orderId},function (err,order) {
+                if (err){
+                    Restify.RespondError(res,400,"DB Error");
+                }
+                else {
+                    var total = order.Total;
+                    Modules.PayPal_API.ExecuteOrder(req.params.orderId, req.params.payerId, total, function (err, result) {
+                        if (err){
+                            Restify.RespondError(res,400,"Order was not confirmed");
+                        }
+                        else {
+                            order.Completed = true;
+                            order.CompleteDate = new Date();
+                            order.save();
+                            Restify.RespondSuccess(res,true);
+                        }
+                    })
+                }
+            });
+
+        }
+    });
+
 
 
     //admin users

@@ -1,5 +1,5 @@
 "use strict";
-module.exports = function Mandrill_API () {
+module.exports = function PayPal_API() {
     var paypal = require('paypal-rest-sdk');
     var config = global.OStore.Config;
     paypal.configure({
@@ -8,60 +8,77 @@ module.exports = function Mandrill_API () {
         'client_secret': config.paypal.client_secret
     });
 
-    //
-    // var card_data = {
-    //     "type": "visa",
-    //     "number": "4417119669820331",
-    //     "expire_month": "11",
-    //     "expire_year": "2018",
-    //     "cvv2": "123",
-    //     "first_name": "Joe",
-    //     "last_name": "Shopper"
-    // };
-    //
-    // paypal.creditCard.create(card_data, function(error, credit_card){
-    //     if (error) {
-    //         console.log(error);
-    //         throw error;
-    //     } else {
-    //         console.log("Create Credit-Card Response");
-    //         console.log(credit_card);
-    //     }
-    // })
-
-    var create_payment_json = {
-        "intent": "order",
-        "payer": {
-            "payment_method": "paypal"
-        },
-        "redirect_urls": {
-            "return_url": "http://return.url",
-            "cancel_url": "http://cancel.url"
-        },
-        "transactions": [{
-            "item_list": {
-                "items": [{
-                    "name": "item",
-                    "sku": "item",
-                    "price": "1.00",
+    this.createBlankOrder = function (url) {
+        var order = {
+            "intent": "order",
+            "payer": {
+                "payment_method": "paypal"
+            },
+            "redirect_urls": {
+                "return_url": url,
+                "cancel_url": "http://cancel.url"
+            },
+            "transactions": [{
+                "item_list": {
+                    "items": []
+                },
+                "amount": {
                     "currency": "USD",
-                    "quantity": 1
-                }]
-            },
-            "amount": {
-                "currency": "USD",
-                "total": "1.00"
-            },
-            "description": "This is the payment description."
-        }]
+                    "total": ""
+                },
+                "description": "This is the payment description."
+            }]
+        }
+        return order;
     };
 
-    paypal.payment.create(create_payment_json, function (error, payment) {
-        if (error) {
-            throw error;
-        } else {
-
+    this.transformProduct = function (product, quantity) {
+        return {
+            "name": product.Name,
+            "sku": product._id,
+            "price": product.Price,
+            "currency": "USD",
+            "quantity": quantity
         }
-    });
+    };
+
+
+    this.CreateOrderSingleProduct = function (product, quantity, callBack) {
+        var order = this.createBlankOrder("http://localhost:3031/#!/products/product/"+ product._id+"/");
+        var OrderProduct = this.transformProduct(product, quantity);
+        order.transactions[0].item_list.items.push(OrderProduct);
+        order.transactions[0].amount.total = quantity * product.Price;
+        paypal.payment.create(order, function (error, payment) {
+            callBack(error, payment);
+        });
+    };
+
+    this.GetOrder = function (orderId) {
+        paypal.payment.get(orderId, function (err, payment) {
+
+        });
+    }
+
+
+    this.createExecutePayment = function (payerId, Total) {
+        return {
+            "payer_id": payerId,
+            "transactions": [{
+                "amount": {
+                    "currency": "USD",
+                    "total": Total.toString() + ".00"
+                }
+            }]
+        };
+    };
+
+
+    this.ExecuteOrder = function (paymentId,payerId,total, callBack) {
+        var executedPayment = this.createExecutePayment(payerId,total);
+        paypal.payment.execute(paymentId, executedPayment, function (error, payment) {
+            callBack(error, payment);
+        });
+    };
+
 
 };

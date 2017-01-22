@@ -5,7 +5,6 @@
   "mongoDB": "mongodb://localhost:27017/FinkiOStore",
   "mailCredentials":"smtps://finkistore121%40gmail.com:pasvord123@smtp.gmail.com",
   "paypal":{
-    "return_url":"http://localhost:3003/order/confirmed/:paymentId",
     "mode":"sandbox",
     "client_id":"ATveLv3ZUvvq_r3j7NfW88jK2vRtvHRZYY0z-qsJx9QG-y8w5E4CVleVx-jW-LDup5xIjqUk8wXAlcSi",
     "client_secret":"EHlkvjcyMzNvc-8JwPzzGInJHMRvSodn-wYCdLW2h44wYRTuWyQTe3aHHFKbFFOFhOp_FkwxhP8mEWeV"

@@ -53,26 +53,26 @@ module.exports = function DMS() {
 
         }
     };
-
-    this.DeleteFile = function (FileID, callBack) {
-        if (!FileID) {
-            callBack("No data recieved", null);
-        }
-        else {
-            var FileModel = mongoose.model('File');
-            FileModel.findByIdAndRemove(FileID, function (err, file) {
-                if (err) {
-                    callBack(err, null);
-                }
-                else {
-                    var filePath = file.PhysicalPath;
-                    fs.unlink(filePath, function (err) {
-                        callBack(err, null);
-                    });
-                }
-            })
-        }
-    };
+    //
+    // this.DeleteFile = function (FileID, callBack) {
+    //     if (!FileID) {
+    //         callBack("No data recieved", null);
+    //     }
+    //     else {
+    //         var FileModel = mongoose.model('File');
+    //         FileModel.findByIdAndRemove(FileID, function (err, file) {
+    //             if (err) {
+    //                 callBack(err, null);
+    //             }
+    //             else {
+    //                 var filePath = file.PhysicalPath;
+    //                 fs.unlink(filePath, function (err) {
+    //                     callBack(err, null);
+    //                 });
+    //             }
+    //         })
+    //     }
+    // };
 
     this.DownloadFile = function (FileID, callBack) {
         var FileModel = mongoose.model('File');

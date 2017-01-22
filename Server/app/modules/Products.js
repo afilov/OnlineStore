@@ -95,7 +95,7 @@ Method.Create = function (req, res, next) {
         var tmpProduct = new RefModules.Product(req.body);
         ProductModel.create(tmpProduct, function (err, product) {
             if (err) {
-                Restify.RespondError(res,401, "DB Error");
+                Restify.RespondError(res, 401, "DB Error");
             }
             else {
                 Restify.RespondSuccess(res, product);
@@ -120,6 +120,51 @@ Method.Delete = function (req, res, next) {
             }
             next();
         })
+    }
+};
+
+Method.Buy = function (req, res, next) {
+    if (!req.body) {
+        Restify.RespondError(res, 400, "No data recieved");
+        next();
+    }
+    else {
+        var product = req.body.product;
+        var quantity = req.body.quantity;
+        ProductModel.findById(product._id, function (err, product) {
+            if (err) {
+                Restify.RespondError(res, 400, "DB Error");
+            }
+            else if (product == null) {
+                Restify.RespondError(res, 400, "Product is not valid anymore!");
+            }
+            else {
+                global.OStore.Modules.PayPal_API.CreateOrderSingleProduct(product, quantity, function (err, payment) {
+                    if (err) {
+                        Restify.RespondError(res, 400, "PayPal Error!");
+                    }
+                    else {
+                        var OrderModel = mongoose.model('Order');
+                        var newOrder = new OrderModel();
+                        newOrder.ProductId = product._id;
+                        newOrder.Product = product;
+                        newOrder.Total = product.Price * quantity;
+                        newOrder.Completed = false;
+                        newOrder.Name = product.Name;
+                        newOrder.UserId = req.user._id;
+                        newOrder.PayPalId = payment.id;
+                        newOrder.Quantity = quantity;
+                        newOrder.DateCreated = new Date();
+                        newOrder.PaymentLinks = payment.links;
+                        newOrder.save(function (err, result) {
+                            console.log(result);
+                        });
+                        Restify.RespondSuccess(res, payment.links[1]);
+                        next();
+                    }
+                });
+            }
+        });
     }
 };
 
