@@ -135,4 +135,37 @@ Method.Update = function (req, res, next) {
 };
 
 
+Method.Checkout = function (req,res,next) {
+    CartProductModel.find({UserId:req.user._id,Wish:false},function (err,cartProducts) {
+        if (err){
+            Restify.RespondError(res,400, "DB Error");
+        }
+        else if (cartProducts.length == 0){
+            Restify.RespondError(res,400, "No products to checkout");
+        }
+        else {
+            Modules.PayPal_API.CheckOutCartProducts(cartProducts,function (err,payment) {
+                if (err){
+                    Restify.RespondError(res,400, "PayPal Error");
+                }
+                else {
+                    var OrderModel = mongoose.model('Order');
+                    var newOrder = new OrderModel();
+                    newOrder.Total =  payment.transactions[0].amount.total;
+                    newOrder.Completed = false;
+                    newOrder.UserId = req.user._id;
+                    newOrder.CartProducts = cartProducts;
+                    newOrder.PayPalId = payment.id;
+                    newOrder.DateCreated = new Date();
+                    newOrder.PaymentLinks = payment.links;
+                    newOrder.save(function (err, result) {
+                        console.log(result);
+                    });
+                    Restify.RespondSuccess(res, payment.links[1]);
+                }
+            });
+        }
+    })
+}
+
 module.exports = CartProduct;

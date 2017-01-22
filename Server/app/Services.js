@@ -112,6 +112,8 @@ module.exports = function Services() {
 
     Restify.AddGetService('/user/cart/products', true, Modules.CartProduct.GetAll);
 
+    Restify.AddGetService('/user/checkout/cart/products', true, Modules.CartProduct.Checkout);
+
     Restify.AddGetService('/user/cart/product/:_id', true, Modules.CartProduct.GetById);
 
     Restify.AddPostService('/user/create/cart/product', true, Modules.CartProduct.Create);
@@ -141,7 +143,7 @@ module.exports = function Services() {
                         }
                         else {
                             order.Completed = true;
-                            order.CompleteDate = new Date();
+                            order.DateCompleted = new Date();
                             order.save();
                             Restify.RespondSuccess(res,true);
                         }

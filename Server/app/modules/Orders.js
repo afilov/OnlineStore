@@ -8,7 +8,7 @@ var OrderSchema = new Schema({
     UserId: String,
     Completed: Boolean,
     ProductId: String,
-    CartProduct: Array,
+    CartProducts: Array,
     Product: Object,
     Total: Number,
     Quantity: Number,
@@ -27,7 +27,7 @@ function Order(data) {
     this.UserId = null;
     this.Completed = null;
     this.ProductId = null;
-    this.CartProduct = {};
+    this.CartProducts = [];
     this.Product = {};
     this.PayPalId = {};
     this.Total = null;
