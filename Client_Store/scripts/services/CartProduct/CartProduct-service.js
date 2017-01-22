@@ -95,7 +95,7 @@ app.service("CartProduct", ['CartProductFactory', '$rootScope', '$q',
             var promise = deferred.promise;
             var factoryPromise = CartProductFactory.deleteCartProduct(this._id);
             factoryPromise.then(function (data) {
-                $rootScope.showActionToast(data.data.Name + ' has been deleted!');
+                $rootScope.showActionToast(data.data.Product.Name + ' has been deleted!');
                 deferred.resolve(data.data);
             }, function (err) {
                 deferred.reject(err);

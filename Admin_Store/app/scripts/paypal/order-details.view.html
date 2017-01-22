@@ -23,11 +23,11 @@
             <md-card-content>
                 <form name="projectForm" class="form-horizontal">
                     <md-input-container class="md-block" ng-if="currentOrder.CartProducts.length>0">
-                        <label>Products Bought</label>
-                        <input type="number" ng-model="currentOrder.CartProducts.length" ng-disabled="true"/>
+                        <label>Total products bought</label>
+                        <input type="number" ng-model="total" ng-disabled="true"/>
                     </md-input-container>
                     <md-input-container class="md-block" ng-if="currentOrder.CartProducts.length==0">
-                        <label>Products Bought</label>
+                        <label>Total products bought</label>
                         <input type="number" ng-model="currentOrder.Quantity " ng-disabled="true"/>
                     </md-input-container>
                     <md-input-container class="md-block">
